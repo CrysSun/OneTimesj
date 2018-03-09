@@ -12,32 +12,49 @@ import com.bwie.sj.onetime_sj.R;
 /**
  * 闪屏界面
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseAcrivity {
 
     private ImageView splash_icon;
 
     private MyHandler myHandler = new MyHandler();
-    private class MyHandler extends Handler{
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            //收到消息   不做处理
 
-        }
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         //初始化界面
         initView();
-        //延时3秒   发送空消息
-        myHandler.sendEmptyMessageDelayed(0,3000);
-        //跳转界面   结束
-        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+        //延时3秒
+        myHandler.sendEmptyMessageDelayed(0, 3000);
     }
 
-    private void initView() {
+    @Override
+    protected int bindLayout() {
+        return R.layout.activity_splash;
+    }
+
+    private class MyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //跳转界面
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+
+    protected void initView() {
         splash_icon = (ImageView) findViewById(R.id.splash_icon);
+    }
+
+    @Override
+    protected void initData() {
+        //设置沉浸式状态栏
+        setStatus(true);
+        //是否显示actionbar
+        setShowActionBar(false);
+        //是否全屏
+        setFullScreen(true);
     }
 }
