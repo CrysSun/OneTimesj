@@ -15,18 +15,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.bwie.sj.onetime_sj.R2.id.title_tv;
-
 /**
  * 自定义标题view
  * Created by Administrator on 2018/03/13.
  */
 
 public class TitleView extends RelativeLayout {
-    ImageView title_iv;
-    TextView title_tv;
-    ImageView title_head;
-    OnClickImage onClickImage;
+
+    @BindView(R.id.title_head)
+    RoundImageView titleHead;
+    @BindView(R.id.title_tv)
+    TextView titleTv;
+    @BindView(R.id.title_write)
+    ImageView titleWrite;
+    private OnClickImage onClickImage;
 
     public TitleView(Context context) {
         this(context, null);
@@ -44,35 +46,34 @@ public class TitleView extends RelativeLayout {
     }
 
 
-    //图片的点击事件
-    @OnClick({R.id.title_head, R.id.title_iv})
-    public void onViewClick(View view) {
-        switch (view.getId()) {
-            case R.id.title_head:
-                //换头像
-                onClickImage.setHeadIamge();
-                break;
-            case R.id.title_iv:
-                //写信息
-                onClickImage.setWriteImage();
-                break;
-        }
-    }
-
-    //改变tv的值
-    public void setTitle(String title) {
-        title_tv.setText(title);
+    //改变tv的值  设置标题
+    public void setHeadTitle(String title) {
+        titleTv.setText(title);
     }
 
     //换头像的方法
-    public void setTitleHead(Context context, String icon_url) {
+    public void setHeadIcon(Context context, String icon_url) {
         //-----------
-        Glide.with(context).load(icon_url).into(title_head);
+        Glide.with(context).load(icon_url).into(titleHead);
     }
 
     //定义外部访问
     public void setOnClickImage(OnClickImage onClickImage) {
         this.onClickImage = onClickImage;
+    }
+
+    @OnClick({R.id.title_head, R.id.title_write})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.title_head:
+                //换头像
+                onClickImage.setHeadIamge();
+                break;
+            case R.id.title_write:
+                //写信息
+                onClickImage.setWriteImage();
+                break;
+        }
     }
 
     //调用的接口

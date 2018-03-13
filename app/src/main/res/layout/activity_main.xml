@@ -11,15 +11,18 @@
         android:id="@+id/main_head_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"></com.bwie.sj.onetime_sj.views.viewself.TitleView>
+
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></FrameLayout>
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/main_rg"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -30,16 +33,16 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/main_iv_tuijian"
+                android:id="@+id/main_iv_commend"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/tuijian_select" />
 
-            <TextView
-                android:textColor="#0099ff"
-                android:id="@+id/main_tv_tuijian"
+            <RadioButton
+                android:id="@+id/main_rb_commend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@null"
                 android:text="推荐"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -52,16 +55,16 @@
             android:orientation="vertical">
 
             <ImageView
-
-                android:id="@+id/main_iv_daunzi"
+                android:id="@+id/main_iv_jokes"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/duanzi_normal" />
 
-            <TextView
-                android:id="@+id/main_tv_duanzi"
+            <RadioButton
+                android:id="@+id/main_rb_joke"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@null"
                 android:text="段子"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -74,19 +77,20 @@
             android:orientation="vertical">
 
             <ImageView
-
-                android:id="@+id/main_iv_shipin"
+                android:id="@+id/main_iv_video"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/video_normal" />
 
-            <TextView
-                android:id="@+id/main_tv_shipin"
+            <RadioButton
+                android:id="@+id/main_rb_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:button="@null"
                 android:text="视频"
                 android:textSize="15sp" />
         </LinearLayout>
 
-    </LinearLayout>
+    </RadioGroup>
+
 </LinearLayout>
