@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#0099ff"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+
+    <com.bwie.sj.onetime_sj.views.viewself.RoundImageView
+        android:id="@+id/title_head"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/user_white" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="推荐"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/title_iv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/writer" />
+</LinearLayout>

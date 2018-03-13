@@ -18,6 +18,15 @@ public class SplashActivity extends BaseAcrivity {
 
     private MyHandler myHandler = new MyHandler();
 
+    private class MyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //跳转界面
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +43,6 @@ public class SplashActivity extends BaseAcrivity {
         return R.layout.activity_splash;
     }
 
-    private class MyHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            //跳转界面
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            finish();
-        }
-    }
 
     protected void initView() {
         splash_icon = (ImageView) findViewById(R.id.splash_icon);

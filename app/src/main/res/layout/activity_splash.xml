@@ -12,5 +12,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/retina_splash_1499914428" />
+        android:src="@drawable/retina_splash" />
 </LinearLayout>
