@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -35,4 +35,15 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     //glide
     compile 'com.github.bumptech.glide:glide:3.6.1'
+    implementation files('libs/open_sdk_r5788_lite.jar')
+    implementation files('libs/SocialSDK_QQ_Full.jar')
+    implementation files('libs/SocialSDK_Sina_Full.jar')
+    implementation files('libs/SocialSDK_WeiXin_Full.jar')
+    implementation files('libs/umeng_shareboard_widget.jar')
+    implementation files('libs/umeng_social_api.jar')
+    implementation files('libs/umeng_social_net.jar')
+    implementation files('libs/umeng_social_shareboard.jar')
+    implementation files('libs/umeng_social_tool.jar')
+    implementation files('libs/wechat-sdk-android-with-mta-1.1.6.jar')
+    implementation files('libs/weiboSDKCore.jar')
 }
