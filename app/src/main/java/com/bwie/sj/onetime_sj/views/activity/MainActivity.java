@@ -2,7 +2,6 @@ package com.bwie.sj.onetime_sj.views.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -10,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.bwie.sj.onetime_sj.R;
+import com.bwie.sj.onetime_sj.base.BaseAcrivity;
 import com.bwie.sj.onetime_sj.views.fragment.CommendFragment;
 import com.bwie.sj.onetime_sj.views.fragment.JokesFragment;
 import com.bwie.sj.onetime_sj.views.fragment.VideoFragment;

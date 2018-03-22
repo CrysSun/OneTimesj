@@ -1,4 +1,4 @@
-package com.bwie.sj.onetime_sj.views.activity;
+package com.bwie.sj.onetime_sj.base;
 
 import android.os.Build;
 import android.os.Bundle;
