@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="热门的界面"
-        android:textSize="30sp" />
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/hot_xrecler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
 </LinearLayout>

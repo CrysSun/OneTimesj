@@ -1,9 +1,24 @@
 package com.bwie.sj.onetime_sj.model;
 
+import android.util.Log;
+
 import com.bwie.sj.onetime_sj.bean.GgBean;
+import com.bwie.sj.onetime_sj.bean.VideoBean;
 import com.bwie.sj.onetime_sj.http.OkLoadListener;
 import com.bwie.sj.onetime_sj.http.OkhttpUtil;
+import com.bwie.sj.onetime_sj.http.RetrofitService;
+import com.bwie.sj.onetime_sj.http.RetrofitUtil;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 获取数据
@@ -11,10 +26,14 @@ import com.google.gson.Gson;
  */
 
 public class ModelImpl implements IModel {
+
+    private OkhttpUtil instance;
+    private static final String TAG = "ModelImpl";
+
     //获取广告轮播
     @Override
     public void getAdverSuccess(String url, final GetDataListener getDataListener) {
-        OkhttpUtil instance = OkhttpUtil.getInstance();
+        instance = OkhttpUtil.getInstance();
         //get请求
         instance.okGet(url);
         instance.setOkLoadListener(new OkLoadListener() {
@@ -25,10 +44,30 @@ public class ModelImpl implements IModel {
 
             @Override
             public void okLoadErroer(String error) {
-                getDataListener.getSuccess(error);
+                getDataListener.getError(error);
 
             }
         });
 
     }
+
+    @Override
+    public void getVideoSuccess(String url, final GetVideoData getVideoData) {
+        RetrofitUtil instace = RetrofitUtil.getInstace(url);
+        Log.d(TAG, "getVideoSuccess: wwwwwwwwwwwwwwwwwwwww"+url);
+        instace.getData(RetrofitService.class).getVideoList().enqueue(new Callback<VideoBean>() {
+            @Override
+            public void onResponse(Call<VideoBean> call, Response<VideoBean> response) {
+                Log.d(TAG, "onResponse: ++++++++++++" + response.body().getMsg());
+                getVideoData.getVideoSuccess(response.body().getData());
+            }
+
+            @Override
+            public void onFailure(Call<VideoBean> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 }

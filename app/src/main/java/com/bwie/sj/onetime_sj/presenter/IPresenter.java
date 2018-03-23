@@ -8,6 +8,8 @@ import com.bwie.sj.onetime_sj.views.IMainView;
  */
 
 public interface IPresenter {
-    //获取数据展示
+    //获取轮播数据展示
     void showAdversToview(IModel iModel, IMainView iMainView);
+    //获取视频数据展示
+    void showVideoToview(IModel iModel, IMainView iMainView);
 }
