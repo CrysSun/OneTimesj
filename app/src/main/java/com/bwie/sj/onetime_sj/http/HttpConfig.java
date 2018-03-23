@@ -6,6 +6,6 @@ package com.bwie.sj.onetime_sj.http;
  */
 
 public class HttpConfig {
-    //1.广告接口
+    //1.广告接口   热门界面轮播图
     public static String advertiseUrl = "https://www.zhaoapi.cn/quarter/getAd";
 }

@@ -10,6 +10,7 @@ import com.bwie.sj.onetime_sj.views.fragment.FollowFragment;
 import com.bwie.sj.onetime_sj.views.fragment.HotFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/03/21.
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 
 public class TableAdapter extends FragmentPagerAdapter {
     Context context;
-    ArrayList<String> list;
+    List<String> list;
 
-    public TableAdapter(FragmentManager fm, Context context, ArrayList<String> list) {
+    public TableAdapter(FragmentManager fm, Context context, List<String> list) {
         super(fm);
         this.context = context;
         this.list = list;

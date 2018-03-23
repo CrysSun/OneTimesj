@@ -17,6 +17,7 @@ import com.bwie.sj.onetime_sj.adapter.TableAdapter;
 import com.bwie.sj.onetime_sj.base.MyApp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +36,7 @@ public class CommendFragment extends Fragment {
     Unbinder unbinder;
 
     private static final String TAG = "CommendFragment";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,11 +45,11 @@ public class CommendFragment extends Fragment {
 //        //设置标题
 //        commendTabl.addTab(commendTabl.newTab().setText("热门"),true);
 //        commendTabl.addTab(commendTabl.newTab().setText("关注"));
-        ArrayList<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("热门");
         list.add("关注");
         //设置适配器
-        commend_vp.setAdapter(new TableAdapter(getFragmentManager(),list,getActivity()));
+        commend_vp.setAdapter(new TableAdapter(getFragmentManager(), getActivity(), list));
         commendTabl.setupWithViewPager(commend_vp);
         //监听
         commendTabl.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bwie.sj.onetime_sj.R;
+import com.bwie.sj.onetime_sj.base.MyApp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,7 +69,8 @@ public class TitleView extends RelativeLayout {
         switch (view.getId()) {
             case R.id.title_head:
                 //换头像
-                onClickImage.setHeadIamge();
+//                Toast.makeText(MyApp.getAppContext(), "============", Toast.LENGTH_SHORT).show();
+//                onClickImage.setHeadIamge();
                 break;
             case R.id.title_write:
                 //写信息

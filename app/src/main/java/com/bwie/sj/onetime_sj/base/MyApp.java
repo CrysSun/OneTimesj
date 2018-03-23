@@ -7,6 +7,8 @@ import android.widget.Toast;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Administrator on 2018/03/15.
  */
@@ -25,6 +27,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         UMShareAPI.get(this);
+
     }
 
     //返回上下文
