@@ -3,6 +3,7 @@ package com.bwie.sj.onetime_sj.views.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,30 +11,25 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
+import com.bwie.sj.onetime_sj.adapter.VideoXreclerAdapter;
 import com.bwie.sj.onetime_sj.bean.GgBean;
 import com.bwie.sj.onetime_sj.bean.VideoBean;
 import com.bwie.sj.onetime_sj.model.ModelImpl;
 import com.bwie.sj.onetime_sj.presenter.PresenterImpl;
-import com.bwie.sj.onetime_sj.views.IMainView;
+import com.bwie.sj.onetime_sj.views.IHotView;
 import com.bwie.sj.onetime_sj.views.viewself.Banner;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * 热门的界面
  * Created by Administrator on 2018/03/21.
  */
 
-public class HotFragment extends Fragment implements IMainView {
+public class HotFragment extends Fragment implements IHotView {
     private static final String TAG = "HotFragment";
-    //    @BindView(R.id.banner)
-//    Banner banner;
     private XRecyclerView xrecler;
     private Banner banner;
     private PresenterImpl presenter;
@@ -42,30 +38,22 @@ public class HotFragment extends Fragment implements IMainView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_hot, null);
-//        ButterKnife.bind(this, view);
         xrecler = view.findViewById(R.id.hot_xrecler);
+        initView();
         //初始化presenter
         presenter = new PresenterImpl();
-        init();
+        presenter.showAdversToview(new ModelImpl(), this);
+
         presenter.showVideoToview(new ModelImpl(), this);
         return view;
     }
 
-    private void init() {
-        initView();
-        initData();
-
-    }
-
-    private void initData() {
-        //调用轮播
-        presenter.showAdversToview(new ModelImpl(), this);
-    }
-
     private void initView() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.hot_banner, null);
-        banner = view.findViewById(R.id.banner);
+        //xrecler    添加头布局
         xrecler.addHeaderView(view);
+        banner = view.findViewById(R.id.banner);
+
     }
 
     @Override
@@ -77,15 +65,22 @@ public class HotFragment extends Fragment implements IMainView {
             iconList.add(icon);
         }
         Log.d(TAG, "ShowAdvers: ++++++++++++++++" + iconList);
-        banner.loadData(iconList);
+        //banner加载数据
+        banner.loadData(iconList).display();
+
     }
 
     //展示视频列表数据
     @Override
     public void ShowVideo(List<VideoBean.DataBean> list) {
         Log.d(TAG, "ShowHotData: ===============视频列表+++++++++++" + list);
-        //设置适配器
-//        xrecler.setAdapter();
+        //设置适配器    xrecycler
+        VideoXreclerAdapter adapter = new VideoXreclerAdapter(getActivity(), list);
+        xrecler.setAdapter(adapter);
+        //设置布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        xrecler.setLayoutManager(linearLayoutManager);
     }
 
 

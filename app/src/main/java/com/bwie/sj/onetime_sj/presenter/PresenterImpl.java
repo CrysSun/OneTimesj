@@ -7,8 +7,8 @@ import com.bwie.sj.onetime_sj.bean.VideoBean;
 import com.bwie.sj.onetime_sj.http.HttpConfig;
 import com.bwie.sj.onetime_sj.model.GetDataListener;
 import com.bwie.sj.onetime_sj.model.GetVideoData;
-import com.bwie.sj.onetime_sj.model.IModel;
-import com.bwie.sj.onetime_sj.views.IMainView;
+import com.bwie.sj.onetime_sj.model.IHotModel;
+import com.bwie.sj.onetime_sj.views.IHotView;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -17,12 +17,12 @@ import java.util.List;
  * Created by Administrator on 2018/03/22.
  */
 
-public class PresenterImpl implements IPresenter {
+public class PresenterImpl implements IHotPresenter {
     private static final String TAG = "PresenterImpl";
 
     //展示广告数据到轮播
     @Override
-    public void showAdversToview(IModel iModel, final IMainView iMainView) {
+    public void showAdversToview(IHotModel iModel, final IHotView iMainView) {
         iModel.getAdverSuccess(HttpConfig.advertiseUrl, new GetDataListener() {
             @Override
             public void getSuccess(String json) {
@@ -41,16 +41,16 @@ public class PresenterImpl implements IPresenter {
 
     //展示视频数据
     @Override
-    public void showVideoToview(IModel iModel, final IMainView iMainView) {
+    public void showVideoToview(IHotModel iModel, final IHotView iHotView) {
         iModel.getVideoSuccess(HttpConfig.baseUrl, new GetVideoData() {
             @Override
             public void getVideoSuccess(List<VideoBean.DataBean> data) {
-                iMainView.ShowVideo(data);
+                iHotView.ShowVideo(data);
             }
 
             @Override
             public void getVideoError(String error) {
-                iMainView.ShowError(error);
+                iHotView.ShowError(error);
             }
         });
     }

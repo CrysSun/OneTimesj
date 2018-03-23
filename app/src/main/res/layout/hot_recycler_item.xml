@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="349dp"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/recycler_tou"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/recycler_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="个人名称" />
+
+            <TextView
+                android:id="@+id/recycler_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/recycler_jia"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/item_jia" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/recycler_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="标题" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/recycler_icon"
+            android:layout_width="349dp"
+            android:layout_height="210dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/recycler_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="游客名称" />
+
+            <TextView
+                android:id="@+id/recycler_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="9dp"
+                android:text="评价" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/recycler_user2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="游客名称" />
+
+            <TextView
+                android:id="@+id/recycler_count2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="9dp"
+                android:text="评价" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

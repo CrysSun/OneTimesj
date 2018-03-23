@@ -9,9 +9,9 @@ import java.util.List;
  * Created by Administrator on 2018/03/09.
  */
 
-public interface IModel {
+public interface IHotModel {
     //获取广告轮播
     void getAdverSuccess(String url, GetDataListener getDataListener);
-    //获取广告轮播
+    //获取视频
     void getVideoSuccess(String url, GetVideoData getVideoData);
 }

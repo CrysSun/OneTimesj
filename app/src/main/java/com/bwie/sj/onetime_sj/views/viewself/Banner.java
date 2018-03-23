@@ -161,7 +161,6 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
             mDotImageviews.add(iv);
 
             if (i == 0) {
-
                 iv.setImageResource(R.drawable.dot_selected);
             } else {
                 iv.setImageResource(R.drawable.dot_normal);

@@ -2,19 +2,11 @@ package com.bwie.sj.onetime_sj.model;
 
 import android.util.Log;
 
-import com.bwie.sj.onetime_sj.bean.GgBean;
 import com.bwie.sj.onetime_sj.bean.VideoBean;
 import com.bwie.sj.onetime_sj.http.OkLoadListener;
 import com.bwie.sj.onetime_sj.http.OkhttpUtil;
 import com.bwie.sj.onetime_sj.http.RetrofitService;
 import com.bwie.sj.onetime_sj.http.RetrofitUtil;
-import com.google.gson.Gson;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +17,7 @@ import retrofit2.Response;
  * Created by Administrator on 2018/03/22.
  */
 
-public class ModelImpl implements IModel {
+public class ModelImpl implements IHotModel {
 
     private OkhttpUtil instance;
     private static final String TAG = "ModelImpl";
@@ -51,10 +43,10 @@ public class ModelImpl implements IModel {
 
     }
 
+    //获取视频
     @Override
     public void getVideoSuccess(String url, final GetVideoData getVideoData) {
         RetrofitUtil instace = RetrofitUtil.getInstace(url);
-        Log.d(TAG, "getVideoSuccess: wwwwwwwwwwwwwwwwwwwww"+url);
         instace.getData(RetrofitService.class).getVideoList().enqueue(new Callback<VideoBean>() {
             @Override
             public void onResponse(Call<VideoBean> call, Response<VideoBean> response) {
