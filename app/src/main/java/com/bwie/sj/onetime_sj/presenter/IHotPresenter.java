@@ -12,4 +12,6 @@ public interface IHotPresenter {
     void showAdversToview(IHotModel iModel, IHotView iMainView);
     //获取视频数据展示
     void showVideoToview(IHotModel iModel, IHotView iMainView);
+    //解绑
+    void ondetach(IHotView view);
 }

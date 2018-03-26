@@ -18,18 +18,18 @@ import java.util.List;
  * Created by Administrator on 2018/03/23.
  */
 
-public class VideoXreclerAdapter extends XRecyclerView.Adapter<VideoXreclerAdapter.ViewHolder> {
+public class CoHotXreclerAdapter extends XRecyclerView.Adapter<CoHotXreclerAdapter.ViewHolder> {
     Context context;
     List<VideoBean.DataBean> list;
 
-    public VideoXreclerAdapter(Context context, List<VideoBean.DataBean> list) {
+    public CoHotXreclerAdapter(Context context, List<VideoBean.DataBean> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.hot_recycler_item, null);
+        View view = View.inflate(context, R.layout.hot_xrecycler_item, null);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

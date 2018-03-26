@@ -45,7 +45,7 @@ public class ModelImpl implements IHotModel {
 
     //获取视频
     @Override
-    public void getVideoSuccess(String url, final GetVideoData getVideoData) {
+    public void getVideoSuccess(String url, final GetVideoListener getVideoData) {
         RetrofitUtil instace = RetrofitUtil.getInstace(url);
         instace.getData(RetrofitService.class).getVideoList().enqueue(new Callback<VideoBean>() {
             @Override

@@ -5,28 +5,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.bwie.sj.onetime_sj.views.fragment.CoFollowFragment;
-import com.bwie.sj.onetime_sj.views.fragment.HotFragment;
+import com.bwie.sj.onetime_sj.views.fragment.ViHotFragment;
+import com.bwie.sj.onetime_sj.views.fragment.ViNearFragment;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/03/21.
+ * Created by Administrator on 2018/03/24.
  */
 
-public class TableAdapter extends FragmentPagerAdapter {
-    Context context;
+public class CoHotTableAdapter extends FragmentPagerAdapter {
     List<String> list;
+    Context context;
 
-    public TableAdapter(FragmentManager fm, Context context, List<String> list) {
+    public CoHotTableAdapter(FragmentManager fm, Context context, List<String> list) {
         super(fm);
-        this.context = context;
         this.list = list;
+        this.context = context;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-
         return list.get(position);
     }
 
@@ -35,10 +34,10 @@ public class TableAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new HotFragment();
+                fragment = new ViHotFragment();
                 break;
             case 1:
-                fragment = new CoFollowFragment();
+                fragment = new ViNearFragment();
                 break;
         }
         return fragment;

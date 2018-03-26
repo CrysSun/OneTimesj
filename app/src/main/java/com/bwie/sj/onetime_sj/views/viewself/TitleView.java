@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bwie.sj.onetime_sj.R;
@@ -51,10 +52,10 @@ public class TitleView extends RelativeLayout {
         titleTv.setText(title);
     }
 
-    //换头像的方法
-    public void setHeadIcon(Context context, String icon_url) {
+    //展开侧拉的方法
+    public void setHeadIcon() {
         //-----------
-        Glide.with(context).load(icon_url).into(titleHead);
+//        Glide.with(context).load(icon_url).into(titleHead);
     }
 
     //定义外部访问
@@ -66,7 +67,7 @@ public class TitleView extends RelativeLayout {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_head:
-                //换头像
+                //展开  侧拉
                 onClickImage.setHeadIamge();
                 break;
             case R.id.title_write:

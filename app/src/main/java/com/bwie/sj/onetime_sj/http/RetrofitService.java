@@ -1,6 +1,7 @@
 package com.bwie.sj.onetime_sj.http;
 
 import com.bwie.sj.onetime_sj.bean.GgBean;
+import com.bwie.sj.onetime_sj.bean.JokeBean;
 import com.bwie.sj.onetime_sj.bean.VideoBean;
 
 import retrofit2.Call;
@@ -20,5 +21,7 @@ public interface RetrofitService {
 
     //段子
     @POST("quarter/getJokes?source=android&appVersion=101")
-    Call<VideoBean> getJokeList();
+    Call<JokeBean> getJokeList();
+    //关注    https://www.zhaoapi.cn/quarter/follow
+//    @POST("quarter/follow?source=android&appVersion=101");
 }

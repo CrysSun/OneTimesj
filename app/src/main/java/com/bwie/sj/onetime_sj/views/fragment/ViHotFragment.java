@@ -10,15 +10,14 @@ import android.view.ViewGroup;
 import com.bwie.sj.onetime_sj.R;
 
 /**
- * 关注的界面
- * Created by Administrator on 2018/03/21.
+ * Created by Administrator on 2018/03/24.
  */
 
-public class FollowFragment extends Fragment {
+public class ViHotFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_follow, null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.video_hot, null);
         return view;
     }
 }

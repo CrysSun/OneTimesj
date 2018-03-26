@@ -42,32 +42,16 @@ public class CommendFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_commend, null);
         unbinder = ButterKnife.bind(this, view);
-//        //设置标题
-//        commendTabl.addTab(commendTabl.newTab().setText("热门"),true);
-//        commendTabl.addTab(commendTabl.newTab().setText("关注"));
         List<String> list = new ArrayList<>();
         list.add("热门");
         list.add("关注");
-        //设置适配器
-        commend_vp.setAdapter(new TableAdapter(getFragmentManager(), getActivity(), list));
+        //设置顶部导航栏适配器
+        TableAdapter tableAdapter = new TableAdapter(getFragmentManager(), getActivity(), list);
+        commend_vp.setAdapter(tableAdapter);
+        //tab与vp的关联
         commendTabl.setupWithViewPager(commend_vp);
         //监听
-        commendTabl.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+//        commendTabl.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
         return view;
     }
 

@@ -162,9 +162,4 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
     }
     //定义退出的标识
 //    boolean flag = false;
-//    @Override
-//    public boolean onKeyUp(int keyCode, KeyEvent event) {
-//
-//        return super.onKeyUp(keyCode, event);
-//    }
 }

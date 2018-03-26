@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Administrator on 2018/03/23.
  */
 
-public interface GetVideoData {
+public interface GetVideoListener {
     void getVideoSuccess(List<VideoBean.DataBean> data);
 
     void getVideoError(String error);

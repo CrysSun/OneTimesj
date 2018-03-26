@@ -1,5 +1,7 @@
 package com.bwie.sj.onetime_sj.model;
 
+import android.util.Log;
+
 import com.bwie.sj.onetime_sj.bean.JokeBean;
 import com.bwie.sj.onetime_sj.bean.VideoBean;
 import com.bwie.sj.onetime_sj.http.RetrofitService;
@@ -16,22 +18,26 @@ import retrofit2.Response;
  */
 
 public class JokeModelImpl implements IJokeModel {
-    //获取段子的数据
 
+    private static final String TAG = "JokeModelImpl";
+
+    //获取段子的数据
     @Override
-    public void getJokeData(String url, final GetVideoData getVideoData) {
+    public void getJokeData(String url, final GetJokeListener getJokeListener) {
         RetrofitUtil instace = RetrofitUtil.getInstace(url);
-        instace.getData(RetrofitService.class).getJokeList().enqueue(new Callback<VideoBean>() {
+        instace.getData(RetrofitService.class).getJokeList().enqueue(new Callback<JokeBean>() {
             @Override
-            public void onResponse(Call<VideoBean> call, Response<VideoBean> response) {
-                getVideoData.getVideoSuccess(response.body().getData());
+            public void onResponse(Call<JokeBean> call, Response<JokeBean> response) {
+                Log.d(TAG, "onResponse: ============" + response.body().getMsg());
+                getJokeListener.getJokeList(response.body().getData());
             }
 
             @Override
-            public void onFailure(Call<VideoBean> call, Throwable t) {
+            public void onFailure(Call<JokeBean> call, Throwable t) {
 
             }
         });
     }
+
 
 }
