@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right">
+
+        <ImageView
+            android:id="@+id/jok_comment"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/item_comment" />
+
+        <ImageView
+            android:id="@+id/jok_share"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/item_share" />
+
+        <ImageView
+            android:id="@+id/jok_love"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/item_love" />
+
+        <ImageView
+            android:id="@+id/jok_jian"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/item_jian" />
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/jok_jia"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/item_jia" />
+    </RelativeLayout>
+
+
+</LinearLayout>

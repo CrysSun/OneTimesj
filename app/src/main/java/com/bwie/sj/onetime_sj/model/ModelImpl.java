@@ -17,7 +17,7 @@ import retrofit2.Response;
  * Created by Administrator on 2018/03/22.
  */
 
-public class ModelImpl implements IHotModel {
+public class ModelImpl implements ICoHotModel {
 
     private OkhttpUtil instance;
     private static final String TAG = "ModelImpl";
@@ -45,9 +45,9 @@ public class ModelImpl implements IHotModel {
 
     //获取视频
     @Override
-    public void getVideoSuccess(String url, final GetVideoListener getVideoData) {
+    public void getVideoSuccess(int page,String url, final GetVideoListener getVideoData) {
         RetrofitUtil instace = RetrofitUtil.getInstace(url);
-        instace.getData(RetrofitService.class).getVideoList().enqueue(new Callback<VideoBean>() {
+        instace.getData(RetrofitService.class).getVideoList(page).enqueue(new Callback<VideoBean>() {
             @Override
             public void onResponse(Call<VideoBean> call, Response<VideoBean> response) {
                 Log.d(TAG, "onResponse: ++++++++++++" + response.body().getMsg());

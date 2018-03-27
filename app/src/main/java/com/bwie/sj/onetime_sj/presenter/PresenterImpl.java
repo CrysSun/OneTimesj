@@ -7,8 +7,8 @@ import com.bwie.sj.onetime_sj.bean.VideoBean;
 import com.bwie.sj.onetime_sj.http.HttpConfig;
 import com.bwie.sj.onetime_sj.model.GetDataListener;
 import com.bwie.sj.onetime_sj.model.GetVideoListener;
-import com.bwie.sj.onetime_sj.model.IHotModel;
-import com.bwie.sj.onetime_sj.views.IHotView;
+import com.bwie.sj.onetime_sj.model.ICoHotModel;
+import com.bwie.sj.onetime_sj.views.ICoHotView;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -17,12 +17,12 @@ import java.util.List;
  * Created by Administrator on 2018/03/22.
  */
 
-public class PresenterImpl implements IHotPresenter {
+public class PresenterImpl implements ICoHotPresenter {
     private static final String TAG = "PresenterImpl";
 
     //展示广告数据到轮播
     @Override
-    public void showAdversToview(IHotModel iModel, final IHotView iHotView) {
+    public void showAdversToview(ICoHotModel iModel, final ICoHotView iHotView) {
         iModel.getAdverSuccess(HttpConfig.advertiseUrl, new GetDataListener() {
             @Override
             public void getSuccess(String json) {
@@ -41,8 +41,8 @@ public class PresenterImpl implements IHotPresenter {
 
     //展示视频数据
     @Override
-    public void showVideoToview(IHotModel iModel, final IHotView iHotView) {
-        iModel.getVideoSuccess(HttpConfig.baseUrl, new GetVideoListener() {
+    public void showVideoToview(int page,ICoHotModel iModel, final ICoHotView iHotView) {
+        iModel.getVideoSuccess(page,HttpConfig.baseUrl,new GetVideoListener() {
             @Override
             public void getVideoSuccess(List<VideoBean.DataBean> data) {
                 iHotView.ShowVideo(data);
@@ -56,7 +56,7 @@ public class PresenterImpl implements IHotPresenter {
     }
 
     @Override
-    public void ondetach(IHotView view) {
+    public void ondetach(ICoHotView view) {
         if (view != null) {
             view = null;
         }

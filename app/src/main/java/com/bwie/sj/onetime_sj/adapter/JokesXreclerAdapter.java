@@ -43,13 +43,14 @@ public class JokesXreclerAdapter extends XRecyclerView.Adapter<JokesXreclerAdapt
         holder.jokes_time.setText(list.get(i).getCreateTime());
 
         holder.jokes_title.setText(list.get(i).getContent());
-        //点击事件
-        holder.jokes_jia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "展示", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        //点击事件
+//        holder.jokes_jia.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Toast.makeText(context, "展示", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
@@ -61,7 +62,7 @@ public class JokesXreclerAdapter extends XRecyclerView.Adapter<JokesXreclerAdapt
         private ImageView jokes_tou;
         private TextView jokes_name;
         private TextView jokes_time;
-        private ImageView jokes_jia;
+//        private ImageView jokes_jia;
         private TextView jokes_title;
 
         public MyJokesViewholder(View itemView) {
@@ -69,7 +70,7 @@ public class JokesXreclerAdapter extends XRecyclerView.Adapter<JokesXreclerAdapt
             this.jokes_tou = itemView.findViewById(R.id.jokes_tou);
             this.jokes_name = itemView.findViewById(R.id.jokes_name);
             this.jokes_time = itemView.findViewById(R.id.jokes_time);
-            this.jokes_jia = itemView.findViewById(R.id.jokes_jia);
+//            this.jokes_jia = itemView.findViewById(R.id.jokes_jia);
             this.jokes_title = itemView.findViewById(R.id.jokes_title);
         }
 
@@ -95,14 +96,6 @@ public class JokesXreclerAdapter extends XRecyclerView.Adapter<JokesXreclerAdapt
 
         public void setJokes_time(TextView jokes_time) {
             this.jokes_time = jokes_time;
-        }
-
-        public ImageView getJokes_jia() {
-            return jokes_jia;
-        }
-
-        public void setJokes_jia(ImageView jokes_jia) {
-            this.jokes_jia = jokes_jia;
         }
 
         public TextView getJokes_title() {

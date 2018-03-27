@@ -23,9 +23,9 @@ public class JokeModelImpl implements IJokeModel {
 
     //获取段子的数据
     @Override
-    public void getJokeData(String url, final GetJokeListener getJokeListener) {
+    public void getJokeData(int page,String url, final GetJokeListener getJokeListener) {
         RetrofitUtil instace = RetrofitUtil.getInstace(url);
-        instace.getData(RetrofitService.class).getJokeList().enqueue(new Callback<JokeBean>() {
+        instace.getData(RetrofitService.class).getJokeList(page).enqueue(new Callback<JokeBean>() {
             @Override
             public void onResponse(Call<JokeBean> call, Response<JokeBean> response) {
                 Log.d(TAG, "onResponse: ============" + response.body().getMsg());

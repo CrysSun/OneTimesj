@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="main_head">#0099ff</color>
+
+    <color name="thumb_select">#0099ff</color>
+    <color name="thumb_normal">#cccccc</color>
 </resources>

@@ -61,7 +61,6 @@ public class CoHotXreclerAdapter extends XRecyclerView.Adapter<CoHotXreclerAdapt
         private ImageView recycler_tou;
         private TextView recycler_name;
         private TextView recycler_time;
-        private ImageView recycler_jia;
         private TextView recycler_title;
         private ImageView recycler_icon;
         private TextView recycler_user;
@@ -74,7 +73,6 @@ public class CoHotXreclerAdapter extends XRecyclerView.Adapter<CoHotXreclerAdapt
             this.recycler_tou = itemView.findViewById(R.id.recycler_tou);
             this.recycler_name = itemView.findViewById(R.id.recycler_name);
             this.recycler_time = itemView.findViewById(R.id.recycler_time);
-            this.recycler_jia = itemView.findViewById(R.id.recycler_jia);
             this.recycler_title = itemView.findViewById(R.id.recycler_title);
             this.recycler_icon = itemView.findViewById(R.id.recycler_icon);
             this.recycler_user = itemView.findViewById(R.id.recycler_user);
@@ -105,14 +103,6 @@ public class CoHotXreclerAdapter extends XRecyclerView.Adapter<CoHotXreclerAdapt
 
         public void setRecycler_time(TextView recycler_time) {
             this.recycler_time = recycler_time;
-        }
-
-        public ImageView getRecycler_jia() {
-            return recycler_jia;
-        }
-
-        public void setRecycler_jia(ImageView recycler_jia) {
-            this.recycler_jia = recycler_jia;
         }
 
         public TextView getRecycler_title() {

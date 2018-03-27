@@ -9,5 +9,5 @@ import java.util.List;
  */
 
 public interface IJokeModel {
-    void getJokeData(String url, GetJokeListener getJokeListener);
+    void getJokeData(int page,String url, GetJokeListener getJokeListener);
 }

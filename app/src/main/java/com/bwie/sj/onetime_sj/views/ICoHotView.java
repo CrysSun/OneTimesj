@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Administrator on 2018/03/09.
  */
 
-public interface IHotView {
+public interface ICoHotView {
     //展示轮播图
     void ShowAdvers(List<GgBean.DataBean> data);
 

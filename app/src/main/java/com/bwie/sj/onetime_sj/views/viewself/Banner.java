@@ -243,7 +243,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
                 }
             });
 
-            System.out.println("urls:" + mUrls.get(position));
+//            System.out.println("urls:" + mUrls.get(position));
 
 //            ImageLoader.getInstance().displayImage(mUrls.get(position), view);
             Glide.with(context)

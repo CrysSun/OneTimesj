@@ -9,5 +9,7 @@ import com.bwie.sj.onetime_sj.views.IJokeView;
 
 public interface IJokePresenter {
     //获取数据展示在视图
-    void showJokesToVIew(IJokeModel iJokeModel, IJokeView iJokeView);
+    void showJokesToVIew(int page,IJokeModel iJokeModel, IJokeView iJokeView);
+    //解绑
+    void ondetach(IJokeView iJokeView);
 }

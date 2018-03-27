@@ -16,7 +16,7 @@ import com.bwie.sj.onetime_sj.bean.GgBean;
 import com.bwie.sj.onetime_sj.bean.VideoBean;
 import com.bwie.sj.onetime_sj.model.ModelImpl;
 import com.bwie.sj.onetime_sj.presenter.PresenterImpl;
-import com.bwie.sj.onetime_sj.views.IHotView;
+import com.bwie.sj.onetime_sj.views.ICoHotView;
 import com.bwie.sj.onetime_sj.views.viewself.Banner;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -28,11 +28,13 @@ import java.util.List;
  * Created by Administrator on 2018/03/21.
  */
 
-public class HotFragment extends Fragment implements IHotView {
+public class HotFragment extends Fragment implements ICoHotView {
     private static final String TAG = "HotFragment";
     private XRecyclerView xrecler;
     private Banner banner;
     private PresenterImpl presenter;
+    private int page = 1;
+    private CoHotXreclerAdapter coHotXreclerAdapter;
 
     @Nullable
     @Override
@@ -42,26 +44,51 @@ public class HotFragment extends Fragment implements IHotView {
         xrecler = view.findViewById(R.id.hot_xrecler);
         //初始化轮播布局
         initView();
+        //上下拉刷新
+        pull();
         return view;
     }
-
     //懒加载
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            initData();
+            //初始化presenter
+            presenter = new PresenterImpl();
+            //调用轮播广告展示
+            presenter.showAdversToview(new ModelImpl(), this);
+            //加载第一遍
+            getData(1);
         }
+    }
+    private void pull() {
+        xrecler.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page = 1;
+                getData(page);
+                xrecler.refreshComplete();
+                Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLoadMore() {
+                page++;
+                getData(page);
+                xrecler.loadMoreComplete();
+                Toast.makeText(getActivity(), "加载更多", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
 
+
+
     //初始化presenter
-    private void initData() {
-        presenter = new PresenterImpl();
-        //调用轮播广告展示
-        presenter.showAdversToview(new ModelImpl(), this);
+    private void getData(int pages) {
         //调用推荐界面热门视频展示
-        presenter.showVideoToview(new ModelImpl(), this);
+        presenter.showVideoToview(pages, new ModelImpl(), this);
     }
 
 
@@ -93,12 +120,19 @@ public class HotFragment extends Fragment implements IHotView {
     public void ShowVideo(List<VideoBean.DataBean> list) {
         Log.d(TAG, "ShowHotData: ===============视频列表+++++++++++" + list);
         //设置适配器    xrecycler
-        CoHotXreclerAdapter adapter = new CoHotXreclerAdapter(getActivity(), list);
-        xrecler.setAdapter(adapter);
-        //设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        xrecler.setLayoutManager(linearLayoutManager);
+        if (coHotXreclerAdapter == null) {
+            //设置布局管理器
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            xrecler.setLayoutManager(linearLayoutManager);
+            //设置适配器
+            coHotXreclerAdapter = new CoHotXreclerAdapter(getActivity(), list);
+            xrecler.setAdapter(coHotXreclerAdapter);
+        } else {
+            //刷新适配器
+            coHotXreclerAdapter.notifyDataSetChanged();
+        }
+
     }
 
 

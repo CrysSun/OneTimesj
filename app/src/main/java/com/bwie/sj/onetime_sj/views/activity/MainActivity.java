@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.base.BaseAcrivity;
@@ -14,6 +15,7 @@ import com.bwie.sj.onetime_sj.views.fragment.CommendFragment;
 import com.bwie.sj.onetime_sj.views.fragment.JokesFragment;
 import com.bwie.sj.onetime_sj.views.fragment.VideoFragment;
 import com.bwie.sj.onetime_sj.views.viewself.TitleView;
+import com.bwie.sj.slidingmenu.SlidingMenu;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +56,28 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
         //----
         titleView = new TitleView(MainActivity.this);
         titleView.setOnClickImage(this);
+        //侧滑  slidingmenu
+        slidingMenu();
+    }
+
+    private void slidingMenu() {
+        SlidingMenu menu = new SlidingMenu(this);
+        menu.setMode(SlidingMenu.LEFT);
+        // 设置触摸屏幕的模式
+        //TOUCHMODE_FULLSCREEN  设置滑动的屏幕范围，该设置为全屏区域都可以滑动
+        //TOUCHMODE_MARGIN  从边缘滑出
+        //TOUCHMODE_NONE   不能滑动
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setShadowWidthRes(R.dimen.slidingmenu_offset);
+
+        // 设置滑动 菜单视图的宽度
+        menu.setBehindOffsetRes(R.dimen.shadow_width);
+        // 设置渐入渐出效果的值
+        menu.setFadeDegree(0.35f);
+
+        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        //为侧滑菜单设置布局
+        menu.setMenu(R.layout.layout_left_menu);
     }
 
     @Override
@@ -90,7 +114,7 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
         setFullScreen(true);
     }
 
-    @OnClick({R.id.main_rb_commend, R.id.main_rb_joke, R.id.main_rb_video, R.id.main_rg})
+    @OnClick({R.id.main_rb_commend, R.id.main_rb_joke, R.id.main_rb_video})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.main_rb_commend:
@@ -111,8 +135,8 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
                 getSupportFragmentManager().beginTransaction().show(videoFragment).commit();
                 setStyle(3);
                 break;
-            case R.id.main_rg:
-                break;
+//            case R.id.main_rg:
+//                break;
         }
     }
 
@@ -129,22 +153,24 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
         int color = getResources().getColor(R.color.main_head);
         switch (flag) {
             case 1:
-                mainRbCommend.setTextColor(color);
-                mainIvCommend.setImageResource(R.drawable.tuijian_select);
                 //设置标题
                 titleView.setHeadTitle("推荐");
+                mainRbCommend.setTextColor(color);
+                mainIvCommend.setImageResource(R.drawable.tuijian_select);
                 break;
             case 2:
-                mainRbJoke.setTextColor(color);
-                mainIvJokes.setImageResource(R.drawable.duanzi_select);
                 //设置标题
                 titleView.setHeadTitle("段子");
+                mainRbJoke.setTextColor(color);
+                mainIvJokes.setImageResource(R.drawable.duanzi_select);
+//                Toast.makeText(this, "段子", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
-                mainRbVideo.setTextColor(color);
-                mainIvVideo.setImageResource(R.drawable.video_select);
                 //设置标题
                 titleView.setHeadTitle("视频");
+                mainRbVideo.setTextColor(color);
+                mainIvVideo.setImageResource(R.drawable.video_select);
+
                 break;
         }
     }

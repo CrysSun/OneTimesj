@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
@@ -26,6 +27,8 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //初始化fresco
+        Fresco.initialize(this);
         UMShareAPI.get(this);
 
     }

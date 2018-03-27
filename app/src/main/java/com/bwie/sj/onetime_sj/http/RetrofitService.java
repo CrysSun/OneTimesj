@@ -17,11 +17,12 @@ import retrofit2.http.Query;
 public interface RetrofitService {
     //视频
     @POST("quarter/getVideos?source=android&appVersion=101")
-    Call<VideoBean> getVideoList();
+    Call<VideoBean> getVideoList(@Query("page") int page);
 
     //段子
     @POST("quarter/getJokes?source=android&appVersion=101")
-    Call<JokeBean> getJokeList();
+    Call<JokeBean> getJokeList(@Query("page") int page);
+
     //关注    https://www.zhaoapi.cn/quarter/follow
 //    @POST("quarter/follow?source=android&appVersion=101");
 }

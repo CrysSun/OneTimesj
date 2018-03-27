@@ -20,9 +20,9 @@
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="@dimen/y1080"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -39,11 +39,11 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/jokes_jia"
-            android:layout_width="40dp"
+        <com.bwie.sj.onetime_sj.views.viewself.JokeCicle
+            android:layout_width="210dp"
             android:layout_height="40dp"
-            android:src="@drawable/item_jia" />
+            android:id="@+id/jokes_jia"  ></com.bwie.sj.onetime_sj.views.viewself.JokeCicle>
+
 
     </LinearLayout>
 

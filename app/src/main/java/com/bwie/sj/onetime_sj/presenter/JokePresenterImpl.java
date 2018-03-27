@@ -14,8 +14,8 @@ import java.util.List;
 
 public class JokePresenterImpl implements IJokePresenter {
     @Override
-    public void showJokesToVIew(IJokeModel iJokeModel, final IJokeView iJokeView) {
-        iJokeModel.getJokeData(HttpConfig.baseUrl, new GetJokeListener() {
+    public void showJokesToVIew(int page,IJokeModel iJokeModel, final IJokeView iJokeView) {
+        iJokeModel.getJokeData(page,HttpConfig.baseUrl, new GetJokeListener() {
             @Override
             public void getJokeList(List<JokeBean.DataBean> data) {
                 iJokeView.showJokes(data);
@@ -26,5 +26,12 @@ public class JokePresenterImpl implements IJokePresenter {
                 iJokeView.showError(error);
             }
         });
+    }
+
+    @Override
+    public void ondetach(IJokeView iJokeView) {
+        if (iJokeView!=null){
+            iJokeView=null;
+        }
     }
 }
