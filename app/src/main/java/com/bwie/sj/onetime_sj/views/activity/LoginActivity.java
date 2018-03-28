@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
+import com.bwie.sj.onetime_sj.base.BaseAcrivity;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -26,7 +27,7 @@ import butterknife.OnClick;
 /**
  * 登录界面
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseAcrivity {
 
     @BindView(R.id.login_back)
     ImageView loginBack;
@@ -53,10 +54,31 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected int bindLayout() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+        //设置沉浸式状态栏
+        setStatus(true);
+        //是否显示actionbar
+        setShowActionBar(false);
+        //是否全屏
+        setFullScreen(true);
+    }
+
     @OnClick({R.id.login_back, R.id.login_black, R.id.login_wechat, R.id.login_qq, R.id.login_other})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_back://返回
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 break;
             case R.id.login_black:
                 break;
@@ -67,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, authListener);
                 break;
             case R.id.login_other://其他登录
-                startActivity(new Intent(LoginActivity.this,OthLogActivity.class));
+                startActivity(new Intent(LoginActivity.this, OthLogActivity.class));
                 break;
         }
     }

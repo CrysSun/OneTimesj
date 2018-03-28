@@ -9,6 +9,8 @@ import com.bwie.sj.onetime_sj.http.RetrofitUtil;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +27,8 @@ public class JokeModelImpl implements IJokeModel {
     @Override
     public void getJokeData(int page,String url, final GetJokeListener getJokeListener) {
         RetrofitUtil instace = RetrofitUtil.getInstace(url);
+//        Observable<JokeBean> jokeList = (Observable<JokeBean>) instace.getData(RetrofitService.class).getJokeList(page);
+//        jokeList.subscribe((Schedulers.newThread())
         instace.getData(RetrofitService.class).getJokeList(page).enqueue(new Callback<JokeBean>() {
             @Override
             public void onResponse(Call<JokeBean> call, Response<JokeBean> response) {

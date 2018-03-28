@@ -6,12 +6,15 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bwie.sj.onetime_sj.R;
 
 /**
+ * 自定义控件    加号
+ * https://blog.csdn.net/thw_m/article/details/79266815
  * Created by Administrator on 2018/03/26.
  */
 
@@ -69,28 +72,47 @@ public class JokeCicle extends RelativeLayout {
         //==========================
         addView(view);
     }
-
-    private void hideMenu() {
-        //平移展示
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(jok_comment
+    public void hideMenu(){
+        //三个平移回去
+        ObjectAnimator firstAnimator = ObjectAnimator.ofFloat(jok_comment
+                , "translationX", jok_jia.getTranslationX(), 0);
+        ObjectAnimator secondAnimator = ObjectAnimator.ofFloat(jok_share
                 , "translationX", jok_share.getTranslationX(), 0);
-        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(jok_share
+        ObjectAnimator thirdAnimator = ObjectAnimator.ofFloat(jok_love
                 , "translationX", jok_comment.getTranslationX(), 0);
-        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(jok_love
-                , "translationX", jok_comment.getTranslationX(), 0);
-        //旋转]
-        ObjectAnimator rotation1 = ObjectAnimator.ofFloat(jok_jian, "rotation", 0, 135, 0);
-        ObjectAnimator rotation2 = ObjectAnimator.ofFloat(jok_comment, "rotation", 0, 180, 0);
-        ObjectAnimator rotation3 = ObjectAnimator.ofFloat(jok_share, "rotation", 0, 180, 0);
+        ObjectAnimator rotation1 = ObjectAnimator.ofFloat(jok_jia, "rotation", 0, 135, 0);
+        ObjectAnimator rotation2 = ObjectAnimator.ofFloat(jok_share, "rotation", 0, 180, 0);
+        ObjectAnimator rotation3 = ObjectAnimator.ofFloat(jok_comment, "rotation", 0, 180, 0);
         ObjectAnimator rotation4 = ObjectAnimator.ofFloat(jok_love, "rotation", 0, 180, 0);
-        //动画集合
+
         AnimatorSet animatorSet = new AnimatorSet();
-        //设置时间
         animatorSet.setDuration(800);
-        animatorSet.playTogether(objectAnimator, objectAnimator1, objectAnimator2, rotation1, rotation2, rotation3, rotation4);
-        //开始
+        animatorSet.setInterpolator(new OvershootInterpolator());
+        animatorSet.playTogether(rotation1,rotation2,rotation3,rotation4,firstAnimator,secondAnimator,thirdAnimator);
+
         animatorSet.start();
     }
+//    private void hideMenu() {
+//        //平移展示
+//        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(jok_comment
+//                , "translationX", jok_share.getTranslationX(), 0);
+//        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(jok_share
+//                , "translationX", jok_comment.getTranslationX(), 0);
+//        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(jok_love
+//                , "translationX", jok_comment.getTranslationX(), 0);
+//        //旋转]
+//        ObjectAnimator rotation1 = ObjectAnimator.ofFloat(jok_jian, "rotation", 0, 135, 0);
+//        ObjectAnimator rotation2 = ObjectAnimator.ofFloat(jok_comment, "rotation", 0, 180, 0);
+//        ObjectAnimator rotation3 = ObjectAnimator.ofFloat(jok_share, "rotation", 0, 180, 0);
+//        ObjectAnimator rotation4 = ObjectAnimator.ofFloat(jok_love, "rotation", 0, 180, 0);
+//        //动画集合
+//        AnimatorSet animatorSet = new AnimatorSet();
+//        //设置时间
+//        animatorSet.setDuration(800);
+//        animatorSet.playTogether(objectAnimator, objectAnimator1, objectAnimator2, rotation1, rotation2, rotation3, rotation4);
+//        //开始
+//        animatorSet.start();
+//    }
 
     //展示按钮的动画
     private void showMenu() {

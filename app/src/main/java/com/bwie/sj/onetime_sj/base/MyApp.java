@@ -5,6 +5,10 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
@@ -30,7 +34,20 @@ public class MyApp extends Application {
         //初始化fresco
         Fresco.initialize(this);
         UMShareAPI.get(this);
+        initImageLoader();
+    }
+    private void initImageLoader() {
+        DisplayImageOptions o = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
 
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .writeDebugLogs()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .defaultDisplayImageOptions(o)
+                .build();
+        ImageLoader.getInstance().init(config);
     }
 
     //返回上下文

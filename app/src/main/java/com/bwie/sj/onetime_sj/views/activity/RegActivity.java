@@ -10,12 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bwie.sj.onetime_sj.R;
+import com.bwie.sj.onetime_sj.base.BaseAcrivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegActivity extends AppCompatActivity {
+public class RegActivity extends BaseAcrivity {
 
     @BindView(R.id.reg_back)
     ImageView regBack;
@@ -37,6 +38,26 @@ public class RegActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected int bindLayout() {
+        return R.layout.activity_reg;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+//设置沉浸式状态栏
+        setStatus(true);
+        //是否显示actionbar
+        setShowActionBar(false);
+        //是否全屏
+        setFullScreen(true);
     }
 
     @OnClick({R.id.reg_back, R.id.reg_or, R.id.reg_black, R.id.reg_account, R.id.reg_pwd, R.id.reg_start, R.id.reg_youke})

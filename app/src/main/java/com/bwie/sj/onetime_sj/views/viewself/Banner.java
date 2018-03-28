@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bwie.sj.onetime_sj.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 //        import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 import java.util.List;
@@ -245,10 +246,8 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
 
 //            System.out.println("urls:" + mUrls.get(position));
 
-//            ImageLoader.getInstance().displayImage(mUrls.get(position), view);
-            Glide.with(context)
-                    .load(mUrls.get(position))
-                    .into(view);
+            ImageLoader.getInstance().displayImage(mUrls.get(position), view);
+//            Glide.with(context).load(mUrls.get(position)).into(view);
             return view;
         }
 

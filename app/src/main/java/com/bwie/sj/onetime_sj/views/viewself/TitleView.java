@@ -52,12 +52,6 @@ public class TitleView extends RelativeLayout {
         titleTv.setText(title);
     }
 
-    //展开侧拉的方法
-    public void setHeadIcon() {
-        //-----------
-//        Glide.with(context).load(icon_url).into(titleHead);
-    }
-
     //定义外部访问
     public void setOnClickImage(OnClickImage onClickImage) {
         this.onClickImage = onClickImage;
@@ -68,7 +62,7 @@ public class TitleView extends RelativeLayout {
         switch (view.getId()) {
             case R.id.title_head:
                 //展开  侧拉
-                onClickImage.setHeadIamge();
+                onClickImage.setSliding();
                 break;
             case R.id.title_write:
                 //写信息
@@ -79,7 +73,7 @@ public class TitleView extends RelativeLayout {
 
     //调用的接口
     public interface OnClickImage {
-        void setHeadIamge();
+        void setSliding();
 
         void setWriteImage();
     }

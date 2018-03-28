@@ -10,12 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bwie.sj.onetime_sj.R;
+import com.bwie.sj.onetime_sj.base.BaseAcrivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class OthLogActivity extends AppCompatActivity {
+public class OthLogActivity extends BaseAcrivity {
 
     @BindView(R.id.other_back)
     ImageView otherBack;
@@ -39,6 +40,26 @@ public class OthLogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oth_log);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected int bindLayout() {
+        return R.layout.activity_oth_log;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+//设置沉浸式状态栏
+        setStatus(true);
+        //是否显示actionbar
+        setShowActionBar(false);
+        //是否全屏
+        setFullScreen(true);
     }
 
     @OnClick({R.id.other_back, R.id.other_reg, R.id.other_black, R.id.other_account, R.id.other_pwd, R.id.other_login, R.id.other_forget, R.id.other_youke})

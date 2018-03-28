@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.adapter.JokesXreclerAdapter;
 import com.bwie.sj.onetime_sj.bean.JokeBean;
@@ -17,7 +16,6 @@ import com.bwie.sj.onetime_sj.model.JokeModelImpl;
 import com.bwie.sj.onetime_sj.presenter.JokePresenterImpl;
 import com.bwie.sj.onetime_sj.views.IJokeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-
 import java.util.List;
 
 /**
@@ -55,6 +53,7 @@ public class JokesFragment extends Fragment implements IJokeView {
             getData(1);
         }
     }
+
     //上下拉刷新
     private void pull() {
         jokes_xrecler.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -63,7 +62,7 @@ public class JokesFragment extends Fragment implements IJokeView {
                 page = 1;
                 getData(page);
                 jokes_xrecler.refreshComplete();
-                Toast.makeText(getActivity(), "下拉刷新"+page, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "下拉刷新" + page, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -71,7 +70,7 @@ public class JokesFragment extends Fragment implements IJokeView {
                 page++;
                 getData(page);
                 jokes_xrecler.loadMoreComplete();
-                Toast.makeText(getActivity(), "加载更多"+page, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "加载更多" + page, Toast.LENGTH_SHORT).show();
             }
         });
     }

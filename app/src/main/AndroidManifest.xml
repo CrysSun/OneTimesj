@@ -28,7 +28,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.activity.MainActivity">
+        <!--全屏导致崩溃的请在清单文件中当前activity中加上-->
+        <activity
+            android:name=".views.activity.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

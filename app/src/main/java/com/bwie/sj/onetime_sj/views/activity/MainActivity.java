@@ -1,5 +1,6 @@
 package com.bwie.sj.onetime_sj.views.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -78,6 +79,15 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         //为侧滑菜单设置布局
         menu.setMenu(R.layout.layout_left_menu);
+        //slidingmenu_head
+        ImageView slidingmenu_head = findViewById(R.id.slidingmenu_head);
+        slidingmenu_head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//                Toast.makeText(MainActivity.this, "哈哈哈", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -175,9 +185,8 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
         }
     }
 
-    //设置头像
     @Override
-    public void setHeadIamge() {
+    public void setSliding() {
 
     }
 

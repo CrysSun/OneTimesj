@@ -10,12 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bwie.sj.onetime_sj.R;
+import com.bwie.sj.onetime_sj.base.BaseAcrivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FindPwdActivity extends AppCompatActivity {
+public class FindPwdActivity extends BaseAcrivity {
 
     @BindView(R.id.find_back)
     ImageView findBack;
@@ -39,6 +40,26 @@ public class FindPwdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_pwd);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected int bindLayout() {
+        return R.layout.activity_find_pwd;
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+//设置沉浸式状态栏
+        setStatus(true);
+        //是否显示actionbar
+        setShowActionBar(false);
+        //是否全屏
+        setFullScreen(true);
     }
 
     @OnClick({R.id.find_back, R.id.find_or, R.id.find_black, R.id.find_account, R.id.find_getcode, R.id.find_pwd, R.id.find_start, R.id.find_youke})
