@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <View
-        android:layout_width="349dp"
+        android:layout_width="@dimen/y1080"
         android:layout_height="10dp" />
 
     <LinearLayout
@@ -21,18 +21,20 @@
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
-            android:layout_width="@dimen/y1080"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                android:textSize="18sp"
                 android:id="@+id/recycler_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="个人名称" />
 
             <TextView
+                android:textSize="18sp"
                 android:id="@+id/recycler_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,13 +49,18 @@
 
 
     </LinearLayout>
-
+    <View
+        android:layout_width="349dp"
+        android:layout_height="8dp" />
     <TextView
+        android:textSize="18sp"
         android:id="@+id/recycler_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="标题" />
-
+    <View
+        android:layout_width="349dp"
+        android:layout_height="8dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,12 +78,14 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textSize="18sp"
                 android:id="@+id/recycler_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="游客名称" />
 
             <TextView
+                android:textSize="18sp"
                 android:id="@+id/recycler_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,12 +99,14 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textSize="18sp"
                 android:id="@+id/recycler_user2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="游客名称" />
 
             <TextView
+                android:textSize="18sp"
                 android:id="@+id/recycler_count2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

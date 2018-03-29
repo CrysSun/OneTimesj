@@ -130,7 +130,7 @@ public class OkhttpUtil {
                     okLoadListener.okLoadSuccess((String) msg.obj);
                     break;
                 case 1://失败
-                    okLoadListener.okLoadSuccess((String) msg.obj);
+                    okLoadListener.okLoadErroer((String) msg.obj);
                     break;
             }
         }

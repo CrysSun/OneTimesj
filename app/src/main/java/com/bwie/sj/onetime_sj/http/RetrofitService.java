@@ -3,6 +3,7 @@ package com.bwie.sj.onetime_sj.http;
 import com.bwie.sj.onetime_sj.bean.JokeBean;
 import com.bwie.sj.onetime_sj.bean.UserLogin;
 import com.bwie.sj.onetime_sj.bean.CoHotBean;
+import com.bwie.sj.onetime_sj.bean.ViHotBean;
 
 import retrofit2.Call;
 import retrofit2.http.POST;
@@ -27,6 +28,8 @@ public interface RetrofitService {
     @POST("quarter/getJokes?source=android&appVersion=101")
     Call<JokeBean> getJokeList(@Query("page") int page);
 
-    //关注    https://www.zhaoapi.cn/quarter/follow
-//    @POST("quarter/follow?source=android&appVersion=101");
+    //段子https://www.zhaoapi.cn/quarter/getHotVideos?token=aaa&source=android&appVersion=101&page=1
+    @POST("quarter/getJokes?token=aaa&source=android&appVersion=101")
+    Call<ViHotBean> getViHotList(@Query("page") int page);
+
 }

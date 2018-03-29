@@ -16,6 +16,8 @@ import com.bwie.sj.onetime_sj.model.JokeModelImpl;
 import com.bwie.sj.onetime_sj.presenter.JokePresenterImpl;
 import com.bwie.sj.onetime_sj.views.IJokeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +31,7 @@ public class JokesFragment extends Fragment implements IJokeView {
     private int page = 1;
     private JokePresenterImpl jokePresenter;
     private JokesXreclerAdapter jokesXreclerAdapter;
+    private List<JokeBean.DataBean> allList;
 
     @Nullable
     @Override
@@ -59,6 +62,7 @@ public class JokesFragment extends Fragment implements IJokeView {
         jokes_xrecler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                allList.clear();
                 page = 1;
                 getData(page);
                 jokes_xrecler.refreshComplete();
@@ -78,19 +82,21 @@ public class JokesFragment extends Fragment implements IJokeView {
 
     //获取数据
     public void getData(int pages) {
+        allList = new ArrayList<>();
         jokePresenter.showJokesToVIew(pages, new JokeModelImpl(), this);
     }
 
     @Override
-    public void showJokes(List<JokeBean.DataBean> data) {
-        Log.d(TAG, "showJokes: dddddddddddddddddddddddd" + data);
+    public void showJokes(List<JokeBean.DataBean> list) {
+        allList.addAll(list);
+        Log.d(TAG, "showJokes: dddddddddddddddddddddddd" + allList);
         if (jokesXreclerAdapter == null) {
             //设置布局管理器
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             jokes_xrecler.setLayoutManager(linearLayoutManager);
             //适配器
-            jokesXreclerAdapter = new JokesXreclerAdapter(getActivity(), data);
+            jokesXreclerAdapter = new JokesXreclerAdapter(getActivity(), allList);
             jokes_xrecler.setAdapter(jokesXreclerAdapter);
 
         } else {

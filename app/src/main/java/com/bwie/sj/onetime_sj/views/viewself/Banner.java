@@ -30,7 +30,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     private final int DELAY_TIME = 3000;//自动轮播时间
     private List<String> mUrls;
     private List<ImageView> mViewpagerViews;
-    private List<ImageView> mDotImageviews;
+//    private List<ImageView> mDotImageviews;
     private Context context;
     private int size;//圆点的大小
     private int margin;//圆点的间距
@@ -75,7 +75,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         this.context = context;
         mUrls = new ArrayList<>();
         mViewpagerViews = new ArrayList<>();
-        mDotImageviews = new ArrayList<>();
+//        mDotImageviews = new ArrayList<>();
         //拿到自定义的属性数组
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Banner);
         //得到数组里的自定义的size（圆点大小）
@@ -106,7 +106,7 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         //绘制viewpager
         drawViewpager();
         //绘制圆点
-        drawDots();
+//        drawDots();
         //设置自动滚动
         setAuto();
 
@@ -145,33 +145,31 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         return this;
     }
 
-    /**
-     * 绘制圆点
-     */
-    private void drawDots() {
-
-        for (int i = 0; i < count; i++) {
-
-            ImageView iv = new ImageView(context);
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
-            params.leftMargin = margin;
-            params.rightMargin = margin;
-            iv.setLayoutParams(params);
-
-            mDotImageviews.add(iv);
-
-            if (i == 0) {
-                iv.setImageResource(R.drawable.dot_selected);
-            } else {
-                iv.setImageResource(R.drawable.dot_normal);
-            }
-
-            mDotlayout.addView(iv);
-        }
-
-
-    }
+//    /**
+//     * 绘制圆点
+//     */
+//    private void drawDots() {
+//
+//        for (int i = 0; i < count; i++) {
+//
+//            ImageView iv = new ImageView(context);
+//
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
+//            params.leftMargin = margin;
+//            params.rightMargin = margin;
+//            iv.setLayoutParams(params);
+//
+//            mDotImageviews.add(iv);
+//
+//            if (i == 0) {
+//                iv.setImageResource(R.drawable.dot_selected);
+//            } else {
+//                iv.setImageResource(R.drawable.dot_normal);
+//            }
+//
+//            mDotlayout.addView(iv);
+//        }
+//    }
 
 
     private void drawViewpager() {
@@ -199,14 +197,14 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
     @Override
     public void onPageSelected(int position) {
 
-        for (int i = 0; i < count; i++) {
-            if (i == position) {
-                mDotImageviews.get(i).setImageResource(R.drawable.dot_selected);
-            } else {
-                mDotImageviews.get(i).setImageResource(R.drawable.dot_normal);
-            }
-
-        }
+//        for (int i = 0; i < count; i++) {
+//            if (i == position) {
+//                mDotImageviews.get(i).setImageResource(R.drawable.dot_selected);
+//            } else {
+//                mDotImageviews.get(i).setImageResource(R.drawable.dot_normal);
+//            }
+//
+//        }
 
     }
 

@@ -79,7 +79,6 @@ public class HotFragment extends Fragment implements ICoHotView {
                 getData(page);
                 xrecler.loadMoreComplete();
                 Toast.makeText(getActivity(), "加载更多", Toast.LENGTH_SHORT).show();
-
             }
         });
     }

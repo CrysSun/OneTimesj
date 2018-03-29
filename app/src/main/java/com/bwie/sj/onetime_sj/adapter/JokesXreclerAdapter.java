@@ -43,7 +43,7 @@ public class JokesXreclerAdapter extends XRecyclerView.Adapter<JokesXreclerAdapt
         holder.jokes_time.setText(list.get(i).getCreateTime());
 
         holder.jokes_title.setText(list.get(i).getContent());
-//        //点击事件
+//        //点击事件    自定义控件==
 //        holder.jokes_jia.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
