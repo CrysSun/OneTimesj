@@ -2,14 +2,13 @@ package com.bwie.sj.onetime_sj.views.viewself;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.bwie.sj.onetime_sj.R;
 
 import butterknife.BindView;
@@ -22,14 +21,14 @@ import butterknife.OnClick;
  */
 
 public class TitleView extends RelativeLayout {
-
     @BindView(R.id.title_head)
     RoundImageView titleHead;
     @BindView(R.id.title_tv)
     TextView titleTv;
     @BindView(R.id.title_write)
     ImageView titleWrite;
-    private OnClickImage onClickImage;
+    private static final String TAG = "TitleView";
+    private OnclickListener onclickListener;
 
     public TitleView(Context context) {
         this(context, null);
@@ -46,35 +45,31 @@ public class TitleView extends RelativeLayout {
         ButterKnife.bind(this);
     }
 
-
-    //改变tv的值  设置标题
-    public void setHeadTitle(String title) {
-        titleTv.setText(title);
-    }
-
-    //定义外部访问
-    public void setOnClickImage(OnClickImage onClickImage) {
-        this.onClickImage = onClickImage;
-    }
-
     @OnClick({R.id.title_head, R.id.title_write})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_head:
-                //展开  侧拉
-                onClickImage.setSliding();
+                onclickListener.setSliding();
                 break;
             case R.id.title_write:
-                //写信息
-                onClickImage.setWriteImage();
+                onclickListener.setWrite();
                 break;
         }
     }
 
-    //调用的接口
-    public interface OnClickImage {
+    public void setTitle(OnclickListener onclickListener) {
+        this.onclickListener = onclickListener;
+    }
+
+    public interface OnclickListener {
         void setSliding();
 
-        void setWriteImage();
+        void setWrite();
+
+    }
+
+    //改变tv的值  设置标题
+    public void setHeadTitle(String title) {
+        titleTv.setText(title);
     }
 }

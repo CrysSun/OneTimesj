@@ -2,8 +2,8 @@ package com.bwie.sj.onetime_sj.presenter;
 
 import android.util.Log;
 
-import com.bwie.sj.onetime_sj.bean.GgBean;
-import com.bwie.sj.onetime_sj.bean.VideoBean;
+import com.bwie.sj.onetime_sj.bean.CoGgBean;
+import com.bwie.sj.onetime_sj.bean.CoHotBean;
 import com.bwie.sj.onetime_sj.http.HttpConfig;
 import com.bwie.sj.onetime_sj.model.GetDataListener;
 import com.bwie.sj.onetime_sj.model.GetVideoListener;
@@ -28,7 +28,7 @@ public class PresenterImpl implements ICoHotPresenter {
             public void getSuccess(String json) {
                 Log.d(TAG, "getSuccess: ============轮播==============" + json);
                 Gson gson = new Gson();
-                GgBean ggBean = gson.fromJson(json, GgBean.class);
+                CoGgBean ggBean = gson.fromJson(json, CoGgBean.class);
                 iHotView.ShowAdvers(ggBean.getData());
             }
 
@@ -44,7 +44,7 @@ public class PresenterImpl implements ICoHotPresenter {
     public void showVideoToview(int page,ICoHotModel iModel, final ICoHotView iHotView) {
         iModel.getVideoSuccess(page,HttpConfig.baseUrl,new GetVideoListener() {
             @Override
-            public void getVideoSuccess(List<VideoBean.DataBean> data) {
+            public void getVideoSuccess(List<CoHotBean.DataBean> data) {
                 iHotView.ShowVideo(data);
             }
 

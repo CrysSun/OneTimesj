@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.adapter.CoHotXreclerAdapter;
-import com.bwie.sj.onetime_sj.bean.GgBean;
-import com.bwie.sj.onetime_sj.bean.VideoBean;
+import com.bwie.sj.onetime_sj.bean.CoGgBean;
+import com.bwie.sj.onetime_sj.bean.CoHotBean;
 import com.bwie.sj.onetime_sj.model.ModelImpl;
 import com.bwie.sj.onetime_sj.presenter.PresenterImpl;
 import com.bwie.sj.onetime_sj.views.ICoHotView;
@@ -48,6 +48,7 @@ public class HotFragment extends Fragment implements ICoHotView {
         pull();
         return view;
     }
+
     //懒加载
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -61,6 +62,7 @@ public class HotFragment extends Fragment implements ICoHotView {
             getData(1);
         }
     }
+
     private void pull() {
         xrecler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -83,8 +85,6 @@ public class HotFragment extends Fragment implements ICoHotView {
     }
 
 
-
-
     //初始化presenter
     private void getData(int pages) {
         //调用推荐界面热门视频展示
@@ -94,15 +94,16 @@ public class HotFragment extends Fragment implements ICoHotView {
 
     private void initView() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.hot_banner, null);
+        banner = view.findViewById(R.id.banner);
         //xrecler    添加头布局           ===========
         xrecler.addHeaderView(view);
-        banner = view.findViewById(R.id.banner);
+
 
     }
 
 
     @Override
-    public void ShowAdvers(List<GgBean.DataBean> list) {
+    public void ShowAdvers(List<CoGgBean.DataBean> list) {
         //获取图片的集合
         List<String> iconList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -117,7 +118,7 @@ public class HotFragment extends Fragment implements ICoHotView {
 
     //展示视频列表数据
     @Override
-    public void ShowVideo(List<VideoBean.DataBean> list) {
+    public void ShowVideo(List<CoHotBean.DataBean> list) {
         Log.d(TAG, "ShowHotData: ===============视频列表+++++++++++" + list);
         //设置适配器    xrecycler
         if (coHotXreclerAdapter == null) {

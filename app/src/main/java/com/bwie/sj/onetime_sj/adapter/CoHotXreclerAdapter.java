@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bwie.sj.onetime_sj.R;
-import com.bwie.sj.onetime_sj.bean.VideoBean;
+import com.bwie.sj.onetime_sj.bean.CoHotBean;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
@@ -22,9 +22,9 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 public class CoHotXreclerAdapter extends XRecyclerView.Adapter<CoHotXreclerAdapter.ViewHolder> {
     Context context;
-    List<VideoBean.DataBean> list;
+    List<CoHotBean.DataBean> list;
 
-    public CoHotXreclerAdapter(Context context, List<VideoBean.DataBean> list) {
+    public CoHotXreclerAdapter(Context context, List<CoHotBean.DataBean> list) {
         this.context = context;
         this.list = list;
     }

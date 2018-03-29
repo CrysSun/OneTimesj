@@ -4,8 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/cofollow_xrecler"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/raw_1500002643" />
 </LinearLayout>

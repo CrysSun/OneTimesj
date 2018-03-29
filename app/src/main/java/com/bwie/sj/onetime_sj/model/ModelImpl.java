@@ -2,7 +2,7 @@ package com.bwie.sj.onetime_sj.model;
 
 import android.util.Log;
 
-import com.bwie.sj.onetime_sj.bean.VideoBean;
+import com.bwie.sj.onetime_sj.bean.CoHotBean;
 import com.bwie.sj.onetime_sj.http.OkLoadListener;
 import com.bwie.sj.onetime_sj.http.OkhttpUtil;
 import com.bwie.sj.onetime_sj.http.RetrofitService;
@@ -47,15 +47,15 @@ public class ModelImpl implements ICoHotModel {
     @Override
     public void getVideoSuccess(int page,String url, final GetVideoListener getVideoData) {
         RetrofitUtil instace = RetrofitUtil.getInstace(url);
-        instace.getData(RetrofitService.class).getVideoList(page).enqueue(new Callback<VideoBean>() {
+        instace.getData(RetrofitService.class).getVideoList(page).enqueue(new Callback<CoHotBean>() {
             @Override
-            public void onResponse(Call<VideoBean> call, Response<VideoBean> response) {
+            public void onResponse(Call<CoHotBean> call, Response<CoHotBean> response) {
                 Log.d(TAG, "onResponse: ++++++++++++" + response.body().getMsg());
                 getVideoData.getVideoSuccess(response.body().getData());
             }
 
             @Override
-            public void onFailure(Call<VideoBean> call, Throwable t) {
+            public void onFailure(Call<CoHotBean> call, Throwable t) {
 
             }
         });

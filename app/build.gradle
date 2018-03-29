@@ -30,6 +30,9 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    //rxjava          --
+    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //imageloder       --
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //节操视频播放器

@@ -1,6 +1,6 @@
 package com.bwie.sj.onetime_sj.model;
 
-import com.bwie.sj.onetime_sj.bean.VideoBean;
+import com.bwie.sj.onetime_sj.bean.CoHotBean;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface GetVideoListener {
-    void getVideoSuccess(List<VideoBean.DataBean> data);
+    void getVideoSuccess(List<CoHotBean.DataBean> data);
 
     void getVideoError(String error);
 }

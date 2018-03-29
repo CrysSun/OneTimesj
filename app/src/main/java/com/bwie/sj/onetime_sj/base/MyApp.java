@@ -26,7 +26,6 @@ public class MyApp extends Application {
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
     }
 
-    private static Context context;
 
     @Override
     public void onCreate() {
@@ -52,6 +51,6 @@ public class MyApp extends Application {
 
     //返回上下文
     public static Context getAppContext() {
-        return MyApp.context;
+        return getAppContext();
     }
 }

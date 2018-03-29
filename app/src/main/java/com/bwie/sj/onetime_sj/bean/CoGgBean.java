@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2018/03/22.
  */
 
-public class GgBean {
+public class CoGgBean {
     /**
      * msg :
      * code : 0

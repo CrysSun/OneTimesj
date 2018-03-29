@@ -8,15 +8,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.base.BaseAcrivity;
+import com.bwie.sj.onetime_sj.model.UserLoginImpl;
+import com.bwie.sj.onetime_sj.presenter.UserLoginPresenter;
+import com.bwie.sj.onetime_sj.views.IloginView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class OthLogActivity extends BaseAcrivity {
+public class OthLogActivity extends BaseAcrivity implements IloginView {
 
     @BindView(R.id.other_back)
     ImageView otherBack;
@@ -34,12 +38,15 @@ public class OthLogActivity extends BaseAcrivity {
     TextView otherForget;
     @BindView(R.id.other_youke)
     TextView otherYouke;
+    private UserLoginPresenter userLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oth_log);
         ButterKnife.bind(this);
+        userLoginPresenter = new UserLoginPresenter();
+
     }
 
     @Override
@@ -68,7 +75,7 @@ public class OthLogActivity extends BaseAcrivity {
             case R.id.other_back:
                 break;
             case R.id.other_reg://注册账号
-                startActivity(new Intent(OthLogActivity.this,RegActivity.class));
+                startActivity(new Intent(OthLogActivity.this, RegActivity.class));
                 break;
             case R.id.other_black:
                 break;
@@ -77,14 +84,27 @@ public class OthLogActivity extends BaseAcrivity {
             case R.id.other_pwd:
                 break;
             case R.id.other_login://跳到主界面
-                startActivity(new Intent(OthLogActivity.this,MainActivity.class));
+                initLogin();
                 break;
             case R.id.other_forget://跳到z找回密码界面
                 startActivity(new Intent(OthLogActivity.this, FindPwdActivity.class));
                 break;
             case R.id.other_youke://跳到主界面
-                startActivity(new Intent(OthLogActivity.this,MainActivity.class));
+                startActivity(new Intent(OthLogActivity.this, MainActivity.class));
                 break;
         }
+    }
+
+    private void initLogin() {
+//        otherAccount.getText();
+//        Toast.makeText(this, "===="+otherAccount.getText(), Toast.LENGTH_SHORT).show();
+//                otherPwd.getText()
+        userLoginPresenter.showLoginToView(new UserLoginImpl(),this,otherAccount.getText()+"",otherPwd.getText()+"");
+        startActivity(new Intent(OthLogActivity.this, MainActivity.class));
+    }
+
+    @Override
+    public void show(String msg) {
+        Toast.makeText(this, msg + "++", Toast.LENGTH_SHORT).show();
     }
 }

@@ -3,6 +3,7 @@ package com.bwie.sj.onetime_sj.views.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -22,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage {
+public class MainActivity extends BaseAcrivity {
 
     @BindView(R.id.main_head_title)
     TitleView mainHeadTitle;
@@ -56,7 +57,17 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
         ButterKnife.bind(this);
         //----
         titleView = new TitleView(MainActivity.this);
-        titleView.setOnClickImage(this);
+        titleView.setTitle(new TitleView.OnclickListener() {
+            @Override
+            public void setSliding() {
+                Log.d(TAG, "setSliding: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            }
+
+            @Override
+            public void setWrite() {
+
+            }
+        });
         //侧滑  slidingmenu
         slidingMenu();
     }
@@ -134,12 +145,14 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
                 setStyle(1);
                 break;
             case R.id.main_rb_joke:
+                titleView.setHeadTitle("段子");
                 getSupportFragmentManager().beginTransaction().hide(commendFragment).commit();
                 getSupportFragmentManager().beginTransaction().show(jokesFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(videoFragment).commit();
                 setStyle(2);
                 break;
             case R.id.main_rb_video:
+                titleView.setHeadTitle("视频");
                 getSupportFragmentManager().beginTransaction().hide(commendFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(jokesFragment).commit();
                 getSupportFragmentManager().beginTransaction().show(videoFragment).commit();
@@ -173,7 +186,6 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
                 titleView.setHeadTitle("段子");
                 mainRbJoke.setTextColor(color);
                 mainIvJokes.setImageResource(R.drawable.duanzi_select);
-//                Toast.makeText(this, "段子", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
                 //设置标题
@@ -185,16 +197,7 @@ public class MainActivity extends BaseAcrivity implements TitleView.OnClickImage
         }
     }
 
-    @Override
-    public void setSliding() {
 
-    }
-
-    //写信息
-    @Override
-    public void setWriteImage() {
-
-    }
     //定义退出的标识
 //    boolean flag = false;
 }

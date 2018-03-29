@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2018/03/23.
  */
 
-public class VideoBean {
+public class CoHotBean {
 
     /**
      * msg : 获取作品列表成功
