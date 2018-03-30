@@ -11,7 +11,7 @@
         android:id="@+id/title_head"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@drawable/user_white" />
+        android:src="@drawable/userinterface_head" />
 
     <TextView
         android:id="@+id/title_tv"

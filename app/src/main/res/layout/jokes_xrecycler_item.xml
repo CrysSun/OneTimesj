@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.bwie.sj.onetime_sj.views.viewself.RoundImageView
             android:id="@+id/jokes_tou"
             android:layout_width="50dp"
             android:layout_height="50dp"

@@ -76,14 +76,14 @@ public class Banner extends FrameLayout implements ViewPager.OnPageChangeListene
         mUrls = new ArrayList<>();
         mViewpagerViews = new ArrayList<>();
 //        mDotImageviews = new ArrayList<>();
-        //拿到自定义的属性数组
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Banner);
-        //得到数组里的自定义的size（圆点大小）
-        size = typedArray.getDimensionPixelSize(R.styleable.Banner_size, 10);
-        //得到数组里的自定义的margin（圆点间距）
-        margin = typedArray.getDimensionPixelSize(R.styleable.Banner_margin, 10);
-
-        typedArray.recycle();//通知jvm的垃圾回收器，当你回收对象的时候，一定要把我回收了
+//        //拿到自定义的属性数组
+//        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Banner);
+//        //得到数组里的自定义的size（圆点大小）
+//        size = typedArray.getDimensionPixelSize(R.styleable.Banner_size, 10);
+//        //得到数组里的自定义的margin（圆点间距）
+//        margin = typedArray.getDimensionPixelSize(R.styleable.Banner_margin, 10);
+//
+//        typedArray.recycle();//通知jvm的垃圾回收器，当你回收对象的时候，一定要把我回收了
 
 
         View view = LayoutInflater.from(context).inflate(R.layout.banner_layout, this, true);

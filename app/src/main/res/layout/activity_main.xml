@@ -7,10 +7,35 @@
     android:orientation="vertical"
     tools:context="com.bwie.sj.onetime_sj.views.activity.MainActivity">
 
-    <com.bwie.sj.onetime_sj.views.viewself.TitleView
-        android:id="@+id/main_head_title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"></com.bwie.sj.onetime_sj.views.viewself.TitleView>
+        android:layout_height="45dp"
+        android:background="@color/main_head"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.bwie.sj.onetime_sj.views.viewself.RoundImageView
+            android:id="@+id/title_head"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/userinterface_head" />
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="推荐"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/title_write"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/writer" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/main_frame"

@@ -6,6 +6,6 @@ import java.util.Map;
  * Created by Administrator on 2018/03/28.
  */
 
-public interface IUserLogin {
+public interface IUserLoginModel {
     void showUserLogin(String url,String mobile,String pwd, GetDataListener getDataListener);
 }

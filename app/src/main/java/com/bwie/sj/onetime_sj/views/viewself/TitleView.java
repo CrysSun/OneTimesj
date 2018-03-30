@@ -49,6 +49,7 @@ public class TitleView extends RelativeLayout {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_head:
+                Log.d(TAG, "onViewClicked: ssssssssssssssssssssss");
                 onclickListener.setSliding();
                 break;
             case R.id.title_write:

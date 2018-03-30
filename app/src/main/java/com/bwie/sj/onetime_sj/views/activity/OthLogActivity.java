@@ -76,6 +76,8 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
                 break;
             case R.id.other_reg://注册账号
                 startActivity(new Intent(OthLogActivity.this, RegActivity.class));
+                //退出动画
+                overridePendingTransition(R.anim.fadein,R.anim.fadeout);
                 break;
             case R.id.other_black:
                 break;
@@ -96,10 +98,8 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
     }
 
     private void initLogin() {
-//        otherAccount.getText();
-//        Toast.makeText(this, "===="+otherAccount.getText(), Toast.LENGTH_SHORT).show();
-//                otherPwd.getText()
         userLoginPresenter.showLoginToView(new UserLoginImpl(),this,otherAccount.getText()+"",otherPwd.getText()+"");
+
         startActivity(new Intent(OthLogActivity.this, MainActivity.class));
     }
 

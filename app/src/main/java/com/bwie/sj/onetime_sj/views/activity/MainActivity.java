@@ -3,13 +3,13 @@ package com.bwie.sj.onetime_sj.views.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
@@ -17,7 +17,6 @@ import com.bwie.sj.onetime_sj.base.BaseAcrivity;
 import com.bwie.sj.onetime_sj.views.fragment.CommendFragment;
 import com.bwie.sj.onetime_sj.views.fragment.JokesFragment;
 import com.bwie.sj.onetime_sj.views.fragment.VideoFragment;
-import com.bwie.sj.onetime_sj.views.viewself.TitleView;
 import com.bwie.sj.slidingmenu.SlidingMenu;
 
 import butterknife.BindView;
@@ -26,8 +25,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseAcrivity {
 
-    @BindView(R.id.main_head_title)
-    TitleView mainHeadTitle;
     @BindView(R.id.main_frame)
     FrameLayout mainFrame;
     @BindView(R.id.main_iv_commend)
@@ -44,11 +41,17 @@ public class MainActivity extends BaseAcrivity {
     RadioButton mainRbVideo;
     @BindView(R.id.main_rg)
     RadioGroup mainRg;
+    @BindView(R.id.title_head)
+    ImageView titleHead;
+    @BindView(R.id.title_write)
+    ImageView titleWrite;
+    @BindView(R.id.title_tv)
+    TextView titleTv;
     private CommendFragment commendFragment;
     private JokesFragment jokesFragment;
     private VideoFragment videoFragment;
     private static final String TAG = "MainActivity";
-    private TitleView titleView;
+    private SlidingMenu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,25 +59,16 @@ public class MainActivity extends BaseAcrivity {
         setContentView(R.layout.activity_main);
         //简单的绑定   使用控件
         ButterKnife.bind(this);
-        //----
-        titleView = new TitleView(MainActivity.this);
-        titleView.setTitle(new TitleView.OnclickListener() {
-            @Override
-            public void setSliding() {
-                Log.d(TAG, "setSliding: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-            }
-
-            @Override
-            public void setWrite() {
-
-            }
-        });
         //侧滑  slidingmenu
         slidingMenu();
+
     }
 
+    /**
+     * 侧滑
+     */
     private void slidingMenu() {
-        SlidingMenu menu = new SlidingMenu(this);
+        menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT);
         // 设置触摸屏幕的模式
         //TOUCHMODE_FULLSCREEN  设置滑动的屏幕范围，该设置为全屏区域都可以滑动
@@ -146,7 +140,7 @@ public class MainActivity extends BaseAcrivity {
         setFullScreen(true);
     }
 
-    @OnClick({R.id.main_rb_commend, R.id.main_rb_joke, R.id.main_rb_video})
+    @OnClick({R.id.main_rb_commend, R.id.main_rb_joke, R.id.main_rb_video, R.id.title_head, R.id.title_write})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.main_rb_commend:
@@ -156,21 +150,25 @@ public class MainActivity extends BaseAcrivity {
                 setStyle(1);
                 break;
             case R.id.main_rb_joke:
-                titleView.setHeadTitle("段子");
                 getSupportFragmentManager().beginTransaction().hide(commendFragment).commit();
                 getSupportFragmentManager().beginTransaction().show(jokesFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(videoFragment).commit();
                 setStyle(2);
                 break;
             case R.id.main_rb_video:
-                titleView.setHeadTitle("视频");
                 getSupportFragmentManager().beginTransaction().hide(commendFragment).commit();
                 getSupportFragmentManager().beginTransaction().hide(jokesFragment).commit();
                 getSupportFragmentManager().beginTransaction().show(videoFragment).commit();
                 setStyle(3);
                 break;
-//            case R.id.main_rg:
-//                break;
+            case R.id.title_head:
+                //展示侧滑菜单
+                menu.toggle(true);
+                break;
+            case R.id.title_write:
+                //跳转创作界面
+                startActivity(new Intent(MainActivity.this, CreatActivity.class));
+                break;
         }
     }
 
@@ -188,22 +186,21 @@ public class MainActivity extends BaseAcrivity {
         switch (flag) {
             case 1:
                 //设置标题
-                titleView.setHeadTitle("推荐");
+                titleTv.setText("推荐");
                 mainRbCommend.setTextColor(color);
                 mainIvCommend.setImageResource(R.drawable.tuijian_select);
                 break;
             case 2:
                 //设置标题
-                titleView.setHeadTitle("段子");
+                titleTv.setText("段子");
                 mainRbJoke.setTextColor(color);
                 mainIvJokes.setImageResource(R.drawable.duanzi_select);
                 break;
             case 3:
                 //设置标题
-                titleView.setHeadTitle("视频");
+                titleTv.setText("视频");
                 mainRbVideo.setTextColor(color);
                 mainIvVideo.setImageResource(R.drawable.video_select);
-
                 break;
         }
     }

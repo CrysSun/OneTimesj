@@ -90,6 +90,8 @@ public class LoginActivity extends BaseAcrivity {
                 break;
             case R.id.login_other://其他登录
                 startActivity(new Intent(LoginActivity.this, OthLogActivity.class));
+                //退出动画
+                overridePendingTransition(R.anim.fadein,R.anim.fadeout);
                 break;
         }
     }
