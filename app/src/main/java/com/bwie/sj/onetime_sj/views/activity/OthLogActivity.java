@@ -45,8 +45,6 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oth_log);
         ButterKnife.bind(this);
-        userLoginPresenter = new UserLoginPresenter();
-
     }
 
     @Override
@@ -56,7 +54,7 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
 
     @Override
     protected void initView() {
-
+        userLoginPresenter = new UserLoginPresenter();
     }
 
     @Override
@@ -76,8 +74,6 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
                 break;
             case R.id.other_reg://注册账号
                 startActivity(new Intent(OthLogActivity.this, RegActivity.class));
-                //退出动画
-                overridePendingTransition(R.anim.fadein,R.anim.fadeout);
                 break;
             case R.id.other_black:
                 break;
@@ -97,14 +93,27 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
         }
     }
 
+    /**
+     * 登录
+     */
     private void initLogin() {
-        userLoginPresenter.showLoginToView(new UserLoginImpl(),this,otherAccount.getText()+"",otherPwd.getText()+"");
-
-        startActivity(new Intent(OthLogActivity.this, MainActivity.class));
+        String loginPhone = otherAccount.getText().toString().trim();
+        String  loginPwd = otherPwd.getText().toString().trim();
+        userLoginPresenter.showLoginToView(new UserLoginImpl(), this, loginPhone, loginPwd);
     }
 
+    //登录
     @Override
-    public void show(String msg) {
-        Toast.makeText(this, msg + "++", Toast.LENGTH_SHORT).show();
+    public void showLogin(String msg) {
+        if (msg.equals("登录成功")) {
+            startActivity(new Intent(OthLogActivity.this, MainActivity.class));
+            finish();
+        } else {
+            otherAccount.setText("");
+            otherPwd.setText("");
+        }
+        Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
     }
+
+
 }

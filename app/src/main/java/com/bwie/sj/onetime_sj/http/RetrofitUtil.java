@@ -36,6 +36,7 @@ public class RetrofitUtil {
     public RetrofitUtil(String url) {
         this.url = url;
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new MyInterceptor()).build();
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(url)
 //                .client(client)

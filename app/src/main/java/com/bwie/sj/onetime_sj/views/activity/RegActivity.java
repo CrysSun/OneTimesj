@@ -8,15 +8,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.base.BaseAcrivity;
+import com.bwie.sj.onetime_sj.model.UserLoginImpl;
+import com.bwie.sj.onetime_sj.presenter.UserLoginPresenter;
+import com.bwie.sj.onetime_sj.views.IRegView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegActivity extends BaseAcrivity {
+public class RegActivity extends BaseAcrivity implements IRegView {
 
     @BindView(R.id.reg_back)
     ImageView regBack;
@@ -32,6 +36,7 @@ public class RegActivity extends BaseAcrivity {
     Button regStart;
     @BindView(R.id.reg_youke)
     TextView regYouke;
+    private UserLoginPresenter userLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class RegActivity extends BaseAcrivity {
 
     @Override
     protected void initView() {
-
+        userLoginPresenter = new UserLoginPresenter();
     }
 
     @Override
@@ -75,11 +80,34 @@ public class RegActivity extends BaseAcrivity {
             case R.id.reg_pwd:
                 break;
             case R.id.reg_start://跳到登录界面
-                startActivity(new Intent(RegActivity.this, OthLogActivity.class));
+                initReg();
+
                 break;
             case R.id.reg_youke://跳到主界面
                 startActivity(new Intent(RegActivity.this,MainActivity.class));
                 break;
         }
+    }
+    /**
+     * 注册账号
+     */
+    private void initReg() {
+        String loginPhone = regAccount.getText().toString().trim();
+        String  loginPwd = regPwd.getText().toString().trim();
+        userLoginPresenter.showRegToView(new UserLoginImpl(),this,loginPhone, loginPwd);
+    }
+    //注册
+    @Override
+    public void showReg(String msg) {
+        if (msg.equals("注册成功")) {
+            startActivity(new Intent(RegActivity.this, OthLogActivity.class));
+            //退出动画
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            finish();
+        } else {
+            regAccount.setText("");
+            regPwd.setText("");
+        }
+        Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
     }
 }

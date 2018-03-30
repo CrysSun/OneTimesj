@@ -67,8 +67,9 @@
             android:layout_width="250dp"
             android:layout_height="45dp"
             android:background="@null"
-            android:singleLine="true"
             android:hint="输入大小写和数字,密码不能超过8位"
+            android:inputType="textPassword"
+            android:singleLine="true"
             android:textColorHint="#999"
             android:textDirection="@null" />
 

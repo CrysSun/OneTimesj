@@ -8,6 +8,12 @@ package com.bwie.sj.onetime_sj.http;
 public class HttpConfig {
     //公共
     public static String baseUrl = "https://www.zhaoapi.cn/";
+    //登录
+    public static String loginUrl = "user/login";
+
+    public static String regUrl = "quarter/register";
+
+
     //1.广告接口   热门界面轮播图
     public static String advertiseUrl = "https://www.zhaoapi.cn/quarter/getAd";
     //source=android、appVersion=101 视频作品列表

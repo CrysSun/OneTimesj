@@ -65,9 +65,10 @@ public class FindPwdActivity extends BaseAcrivity {
     @OnClick({R.id.find_back, R.id.find_or, R.id.find_black, R.id.find_account, R.id.find_getcode, R.id.find_pwd, R.id.find_start, R.id.find_youke})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.find_back:
+            case R.id.find_back://返回登录界面
+                startActivity(new Intent(FindPwdActivity.this, OthLogActivity.class));
                 break;
-            case R.id.find_or://跳到登录界面
+            case R.id.find_or://返回登录界面
                 startActivity(new Intent(FindPwdActivity.this, OthLogActivity.class));
                 break;
             case R.id.find_black:

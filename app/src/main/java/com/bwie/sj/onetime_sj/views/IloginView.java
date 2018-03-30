@@ -6,5 +6,7 @@ package com.bwie.sj.onetime_sj.views;
  */
 
 public interface IloginView {
-    void show(String msg);
+    //登录
+    void showLogin(String msg);
+
 }
