@@ -88,6 +88,7 @@
         <activity android:name=".views.activity.RegActivity" />
         <activity android:name=".views.activity.FindPwdActivity" />
         <activity android:name=".views.activity.CreatActivity"></activity>
+        <activity android:name=".views.activity.CreatWriteActivity"></activity>
     </application>
 
 </manifest>

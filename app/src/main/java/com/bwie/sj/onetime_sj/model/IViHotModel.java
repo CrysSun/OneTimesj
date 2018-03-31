@@ -6,7 +6,7 @@ package com.bwie.sj.onetime_sj.model;
  */
 
 public interface IViHotModel {
-    void getViHotData(String url, int page, GetViHotListener getViHotListener);
+    void getViHotData(String url,String userToken, int page, GetViHotListener getViHotListener);
 
     void getViHotError(String error, GetViHotListener getViHotListener);
 

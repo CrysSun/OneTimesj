@@ -14,8 +14,8 @@ import java.util.List;
 
 public class ViHotPresentImpl implements IViHotPresenter {
     @Override
-    public void showViHotToView(int page, IViHotModel iViHotModel, final IViHotView iViHotView) {
-        iViHotModel.getViHotData(HttpConfig.baseUrl, page, new GetViHotListener() {
+    public void showViHotToView(String userToken,int page, IViHotModel iViHotModel, final IViHotView iViHotView) {
+        iViHotModel.getViHotData(HttpConfig.baseUrl,userToken, page, new GetViHotListener() {
             @Override
             public void getViHotList(List<ViHotBean.DataBean> data) {
                 iViHotView.showGrid(data);

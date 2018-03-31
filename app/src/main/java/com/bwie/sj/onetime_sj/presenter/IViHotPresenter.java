@@ -8,5 +8,5 @@ import com.bwie.sj.onetime_sj.views.IViHotView;
  */
 
 public interface IViHotPresenter {
-    void showViHotToView(int page,IViHotModel iViHotModel, IViHotView iViHotView);
+    void showViHotToView(String userToken,int page,IViHotModel iViHotModel, IViHotView iViHotView);
 }

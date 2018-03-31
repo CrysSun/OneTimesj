@@ -14,9 +14,9 @@ import retrofit2.Response;
 
 public class ViHotModelImpl implements IViHotModel {
     @Override
-    public void getViHotData(String url, int page, final GetViHotListener getViHotListener) {
+    public void getViHotData(String url,String userToken, int page, final GetViHotListener getViHotListener) {
         RetrofitUtil instace = RetrofitUtil.getInstace(url);
-        instace.getData(RetrofitService.class).getViHotList(page).enqueue(new Callback<ViHotBean>() {
+        instace.getData(RetrofitService.class).getViHotList(page,userToken).enqueue(new Callback<ViHotBean>() {
             @Override
             public void onResponse(Call<ViHotBean> call, Response<ViHotBean> response) {
                 getViHotListener.getViHotList(response.body().getData());

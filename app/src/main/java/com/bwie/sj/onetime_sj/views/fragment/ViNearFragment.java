@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.adapter.ViHotAdapter;
+import com.bwie.sj.onetime_sj.bean.UserInfoBean;
 import com.bwie.sj.onetime_sj.bean.ViHotBean;
 import com.bwie.sj.onetime_sj.model.ViHotModelImpl;
 import com.bwie.sj.onetime_sj.presenter.ViHotPresentImpl;
@@ -19,6 +20,10 @@ import com.bwie.sj.onetime_sj.views.IViHotView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+import de.greenrobot.event.ThreadMode;
 
 /**
  * Created by Administrator on 2018/03/24.
@@ -30,17 +35,23 @@ public class ViNearFragment extends Fragment implements IViHotView {
     private XRecyclerView vihot_xrecycler;
     private ViHotAdapter viHotAdapter;
     private ViHotPresentImpl viHotPresent;
-
+    private String userToken;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.video_hot, null);
+        //注册eventbus
+        EventBus.getDefault().register(this);
         vihot_xrecycler = view.findViewById(R.id.vihot_xrecycler);
         //上下拉
         pullXrecler();
         return view;
     }
-
+    //接收eventbus传过来的值
+    @Subscribe(threadMode = ThreadMode.MainThread,sticky = true)
+    public void  onNewsEvent(UserInfoBean userInfoBean){
+        this.userToken=userInfoBean.getToken();
+    }
     /**
      * 上下拉加载
      */
@@ -75,7 +86,7 @@ public class ViNearFragment extends Fragment implements IViHotView {
     }
 
     private void getData(int page) {
-        viHotPresent.showViHotToView(page, new ViHotModelImpl(), this);
+        viHotPresent.showViHotToView(userToken,page, new ViHotModelImpl(), this);
     }
 
     @Override
@@ -100,5 +111,13 @@ public class ViNearFragment extends Fragment implements IViHotView {
     @Override
     public void showError(String error) {
         Toast.makeText(getActivity(), "???" + error, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //解绑eventbus
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
     }
 }

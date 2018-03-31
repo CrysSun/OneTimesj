@@ -23,28 +23,31 @@ public class UserLoginImpl implements IUserLoginModel {
 
     //登录
     @Override
-    public void showUserLogin(String url, final Map<String,String> params, final GetDataListener getDataListener) {
-        Log.d(TAG, "onResponse: ??????????"+params);
+    public void showUserLogin(String url, final Map<String, String> params, final GetUidListener getUidListener) {
+        Log.d(TAG, "onResponse: ??????????" + params);
 
         RetrofitUtil.getInstace(HttpConfig.baseUrl).getData(RetrofitService.class)
-                .userLogin(url,params).enqueue(new Callback<UserLogin>() {
+                .userLogin(url, params).enqueue(new Callback<UserLogin>() {
             @Override
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
-                getDataListener.getSuccess(response.body().getMsg());
+                getUidListener.getSuccess(response.body().getMsg(), response.body().getData().getUid() + "", response.body().getData().getToken());
+
+                Log.d(TAG, "onResponse: aaaaaaaaaaaaa" + response.body().getData().getToken());
             }
 
             @Override
             public void onFailure(Call<UserLogin> call, Throwable t) {
-                getDataListener.getError("失败");
+                getUidListener.getError("失败");
             }
         });
     }
+
 
     //注册
     @Override
     public void showUserReg(String url, Map<String, String> params, final GetDataListener getDataListener) {
         RetrofitUtil.getInstace(HttpConfig.baseUrl).getData(RetrofitService.class)
-                .userReg(url,params).enqueue(new Callback<UserLogin>() {
+                .userReg(url, params).enqueue(new Callback<UserLogin>() {
             @Override
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
                 getDataListener.getSuccess(response.body().getMsg());

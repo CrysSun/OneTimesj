@@ -7,6 +7,5 @@ package com.bwie.sj.onetime_sj.model;
 
 public interface GetDataListener {
     void getSuccess(String json);
-
     void getError(String error);
 }

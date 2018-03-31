@@ -1,5 +1,6 @@
 package com.bwie.sj.onetime_sj.http;
 
+import com.bwie.sj.onetime_sj.bean.CreatBean;
 import com.bwie.sj.onetime_sj.bean.JokeBean;
 import com.bwie.sj.onetime_sj.bean.UserLogin;
 import com.bwie.sj.onetime_sj.bean.CoHotBean;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -21,6 +23,11 @@ import retrofit2.http.Url;
  */
 
 public interface RetrofitService {
+
+    //发布作品7   uid=12790&token=7AB84A69BF4A4174F939A40734060657&content=哈哈哈哈
+    @POST("quarter/publishJoke?source=android&appVersion=101")
+    @FormUrlEncoded
+    Call<CreatBean> creatJoke(@FieldMap Map<String, String> params);
 
     //登录   user/login?mobile=18201084287&password=123456
     @POST
@@ -40,8 +47,9 @@ public interface RetrofitService {
     @POST("quarter/getJokes?source=android&appVersion=101")
     Call<JokeBean> getJokeList(@Query("page") int page);
 
-    //段子https://www.zhaoapi.cn/quarter/getHotVideos?token=aaa&source=android&appVersion=101&page=1
-    @POST("quarter/getJokes?token=aaa&source=android&appVersion=101")
-    Call<ViHotBean> getViHotList(@Query("page") int page);
+    //视频热门https://www.zhaoapi.cn/quarter/getHotVideos?token=aaa&source=android&appVersion=101&page=1
+    @POST("quarter/getJokes?source=android&appVersion=101")
+    @FormUrlEncoded
+    Call<ViHotBean> getViHotList(@Query("page") int page, @Field("token")String token);
 
 }

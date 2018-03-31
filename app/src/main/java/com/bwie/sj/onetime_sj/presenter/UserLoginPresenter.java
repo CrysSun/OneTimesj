@@ -4,8 +4,9 @@ import android.util.Log;
 
 import com.bwie.sj.onetime_sj.http.HttpConfig;
 import com.bwie.sj.onetime_sj.model.GetDataListener;
+import com.bwie.sj.onetime_sj.model.GetUidListener;
 import com.bwie.sj.onetime_sj.model.IUserLoginModel;
-import com.bwie.sj.onetime_sj.views.IRegView;
+import com.bwie.sj.onetime_sj.views.IShowView;
 import com.bwie.sj.onetime_sj.views.IloginView;
 
 import java.util.HashMap;
@@ -26,15 +27,17 @@ public class UserLoginPresenter implements IUserLoginPresenter {
         map.put("mobile", mobile);
         map.put("password", pwd);
         Log.d(TAG, "showLoginToView: ???" + map);
-        iUserLogin.showUserLogin(HttpConfig.loginUrl, map, new GetDataListener() {
+        iUserLogin.showUserLogin(HttpConfig.loginUrl, map, new GetUidListener() {
+
             @Override
-            public void getSuccess(String json) {
-                iloginView.showLogin(json);
+            public void getSuccess(String json, String uid, String token) {
+                iloginView.show(json,uid,token);
+                Log.d(TAG, "getSuccess: aaaaaaaaaaaaaaaaaaaaaaaa"+json);
             }
 
             @Override
             public void getError(String error) {
-                iloginView.showLogin(error);
+                iloginView.show(error,"","");
             }
         });
 
@@ -42,19 +45,19 @@ public class UserLoginPresenter implements IUserLoginPresenter {
 
     //注册
     @Override
-    public void showRegToView(IUserLoginModel iUserLogin, final IRegView iRegView, String mobile, String pwd) {
+    public void showRegToView(IUserLoginModel iUserLogin, final IShowView iShowView, String mobile, String pwd) {
         Map<String, String> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("password", pwd);
         iUserLogin.showUserReg(HttpConfig.regUrl, map, new GetDataListener() {
             @Override
             public void getSuccess(String json) {
-                iRegView.showReg(json);
+                iShowView.show(json);
             }
 
             @Override
             public void getError(String error) {
-                iRegView.showReg(error);
+                iShowView.show(error);
             }
         });
     }

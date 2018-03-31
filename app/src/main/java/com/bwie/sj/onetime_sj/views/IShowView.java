@@ -4,7 +4,7 @@ package com.bwie.sj.onetime_sj.views;
  * Created by Administrator on 2018/03/30.
  */
 
-public interface IRegView {
+public interface IShowView {
     //注册
-    void showReg(String msg);
+    void show(String msg);
 }

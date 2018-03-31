@@ -32,6 +32,14 @@
             android:text="创作"
             android:textColor="#fff"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/creat_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发表"
+            android:textColor="#fff"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,6 +49,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/writ_msg"
             android:layout_width="370dp"
             android:layout_height="85dp"
             android:background="@null"
@@ -49,6 +58,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/writ_jia"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="120dp"

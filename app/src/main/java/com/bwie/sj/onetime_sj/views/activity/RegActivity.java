@@ -2,7 +2,6 @@ package com.bwie.sj.onetime_sj.views.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,13 +13,16 @@ import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.base.BaseAcrivity;
 import com.bwie.sj.onetime_sj.model.UserLoginImpl;
 import com.bwie.sj.onetime_sj.presenter.UserLoginPresenter;
-import com.bwie.sj.onetime_sj.views.IRegView;
+import com.bwie.sj.onetime_sj.views.IShowView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegActivity extends BaseAcrivity implements IRegView {
+/**
+ * 注册界面
+ */
+public class RegActivity extends BaseAcrivity implements IShowView {
 
     @BindView(R.id.reg_back)
     ImageView regBack;
@@ -84,30 +86,33 @@ public class RegActivity extends BaseAcrivity implements IRegView {
 
                 break;
             case R.id.reg_youke://跳到主界面
-                startActivity(new Intent(RegActivity.this,MainActivity.class));
+                startActivity(new Intent(RegActivity.this, MainActivity.class));
                 break;
         }
     }
+
     /**
      * 注册账号
      */
     private void initReg() {
         String loginPhone = regAccount.getText().toString().trim();
-        String  loginPwd = regPwd.getText().toString().trim();
-        userLoginPresenter.showRegToView(new UserLoginImpl(),this,loginPhone, loginPwd);
+        String loginPwd = regPwd.getText().toString().trim();
+        userLoginPresenter.showRegToView(new UserLoginImpl(), this, loginPhone, loginPwd);
     }
+
     //注册
     @Override
-    public void showReg(String msg) {
+    public void show(String msg) {
         if (msg.equals("注册成功")) {
             startActivity(new Intent(RegActivity.this, OthLogActivity.class));
             //退出动画
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             finish();
+            Toast.makeText(this, msg + "!!", Toast.LENGTH_SHORT).show();
         } else {
             regAccount.setText("");
             regPwd.setText("");
+            Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
     }
 }

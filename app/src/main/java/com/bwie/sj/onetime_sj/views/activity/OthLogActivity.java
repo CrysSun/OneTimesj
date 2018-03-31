@@ -2,7 +2,7 @@ package com.bwie.sj.onetime_sj.views.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.base.BaseAcrivity;
+import com.bwie.sj.onetime_sj.bean.UserInfoBean;
 import com.bwie.sj.onetime_sj.model.UserLoginImpl;
 import com.bwie.sj.onetime_sj.presenter.UserLoginPresenter;
 import com.bwie.sj.onetime_sj.views.IloginView;
@@ -19,6 +20,7 @@ import com.bwie.sj.onetime_sj.views.IloginView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 public class OthLogActivity extends BaseAcrivity implements IloginView {
 
@@ -39,12 +41,14 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
     @BindView(R.id.other_youke)
     TextView otherYouke;
     private UserLoginPresenter userLoginPresenter;
+    private static final String TAG = "OthLogActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oth_log);
         ButterKnife.bind(this);
+
     }
 
     @Override
@@ -98,22 +102,28 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
      */
     private void initLogin() {
         String loginPhone = otherAccount.getText().toString().trim();
-        String  loginPwd = otherPwd.getText().toString().trim();
+        String loginPwd = otherPwd.getText().toString().trim();
         userLoginPresenter.showLoginToView(new UserLoginImpl(), this, loginPhone, loginPwd);
     }
 
     //登录
     @Override
-    public void showLogin(String msg) {
+    public void show(String msg, String uid, String token) {
         if (msg.equals("登录成功")) {
-            startActivity(new Intent(OthLogActivity.this, MainActivity.class));
+            Intent intent = new Intent(OthLogActivity.this, MainActivity.class);
+
+            //eventbus传值
+            UserInfoBean userInfoBean = new UserInfoBean(uid, token);
+            EventBus.getDefault().postSticky(userInfoBean);
+            Log.d(TAG, "show:????????? " + userInfoBean.getUid());
+
+            startActivity(intent);
             finish();
+            Toast.makeText(this, msg + "!!", Toast.LENGTH_SHORT).show();
         } else {
             otherAccount.setText("");
             otherPwd.setText("");
+            Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
     }
-
-
 }

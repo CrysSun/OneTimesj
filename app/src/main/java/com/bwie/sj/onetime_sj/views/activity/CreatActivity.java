@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.base.BaseAcrivity;
@@ -62,8 +63,7 @@ public class CreatActivity extends BaseAcrivity {
                 break;
             case R.id.creat_write://发布端子
                 //跳到写段子的界面CreatWriteActivity
-//                startActivity(new Intent(CreatActivity.this, CreatWriteActivity.class));
-
+            startActivity(new Intent(CreatActivity.this,CreatWriteActivity.class));
                 break;
         }
     }

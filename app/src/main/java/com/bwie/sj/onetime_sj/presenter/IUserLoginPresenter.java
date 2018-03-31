@@ -1,7 +1,7 @@
 package com.bwie.sj.onetime_sj.presenter;
 
 import com.bwie.sj.onetime_sj.model.IUserLoginModel;
-import com.bwie.sj.onetime_sj.views.IRegView;
+import com.bwie.sj.onetime_sj.views.IShowView;
 import com.bwie.sj.onetime_sj.views.IloginView;
 
 /**
@@ -13,6 +13,6 @@ public interface IUserLoginPresenter {
     void showLoginToView(IUserLoginModel iUserLogin, IloginView iloginView, String mobile, String pwd);
 
     //注册
-    void showRegToView(IUserLoginModel iUserLogin, IRegView iRegView, String mobile, String pwd);
+    void showRegToView(IUserLoginModel iUserLogin, IShowView iRegView, String mobile, String pwd);
 
 }

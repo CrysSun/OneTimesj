@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface IUserLoginModel {
     //用户登录
-    void showUserLogin(String url, Map<String, String> params, GetDataListener getDataListener);
+    void showUserLogin(String url, Map<String, String> params, GetUidListener getUidListener);
 
     //注册
     void showUserReg(String url, Map<String, String> params, GetDataListener getDataListener);

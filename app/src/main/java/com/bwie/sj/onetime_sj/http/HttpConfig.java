@@ -10,8 +10,14 @@ public class HttpConfig {
     public static String baseUrl = "https://www.zhaoapi.cn/";
     //登录
     public static String loginUrl = "user/login";
-
+    //注册
     public static String regUrl = "quarter/register";
+    //发布段子
+    public static String creatUrl = "quarter/publishJoke";
+
+
+    public static String emptyUrl = "";
+
 
 
     //1.广告接口   热门界面轮播图
