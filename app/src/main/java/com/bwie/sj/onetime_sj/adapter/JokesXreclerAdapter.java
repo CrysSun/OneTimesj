@@ -38,7 +38,7 @@ public class JokesXreclerAdapter extends XRecyclerView.Adapter<JokesXreclerAdapt
     @Override
     public void onBindViewHolder(MyJokesViewholder holder, int i) {
         //为控件赋值
-//        Glide.with(context).load(list.get(i).getImgUrls()).into(holder.jokes_icon);
+        Glide.with(context).load(list.get(i).getImgUrls()).into(holder.jokes_icon);
 
         Glide.with(context).load(list.get(i).getUser().getIcon()).into(holder.jokes_tou);
         holder.jokes_name.setText(list.get(i).getUser().getNickname());
@@ -61,17 +61,17 @@ public class JokesXreclerAdapter extends XRecyclerView.Adapter<JokesXreclerAdapt
     }
 
     class MyJokesViewholder extends RecyclerView.ViewHolder {
-//        private ImageView jokes_icon;
+        private ImageView jokes_icon;
 
         private ImageView jokes_tou;
         private TextView jokes_name;
         private TextView jokes_time;
-        //        private ImageView jokes_jia;
+//                private ImageView jokes_jia;
         private TextView jokes_title;
 
         public MyJokesViewholder(View itemView) {
             super(itemView);
-//            this.jokes_icon = itemView.findViewById(R.id.jokes_icon);
+            this.jokes_icon = itemView.findViewById(R.id.jokes_icon);
 
             this.jokes_tou = itemView.findViewById(R.id.jokes_tou);
             this.jokes_name = itemView.findViewById(R.id.jokes_name);

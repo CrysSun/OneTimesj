@@ -1,9 +1,12 @@
 package com.bwie.sj.onetime_sj.views.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +21,9 @@ import com.bwie.sj.onetime_sj.views.fragment.CommendFragment;
 import com.bwie.sj.onetime_sj.views.fragment.JokesFragment;
 import com.bwie.sj.onetime_sj.views.fragment.VideoFragment;
 import com.bwie.sj.slidingmenu.SlidingMenu;
+import com.facebook.drawee.view.SimpleDraweeView;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,11 +58,15 @@ public class MainActivity extends BaseAcrivity {
     private VideoFragment videoFragment;
     private static final String TAG = "MainActivity";
     private SlidingMenu menu;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //得到sp
+        sp = getSharedPreferences("userlogin", Activity.MODE_WORLD_READABLE);
+
         //简单的绑定   使用控件
         ButterKnife.bind(this);
         //侧滑  slidingmenu
@@ -86,14 +96,25 @@ public class MainActivity extends BaseAcrivity {
         //为侧滑菜单设置布局
         menu.setMenu(R.layout.layout_left_menu);
         //slidingmenu_head
-        LinearLayout login_liner = findViewById(R.id.login_liner);
+        SimpleDraweeView slidingmenu_head = findViewById(R.id.slidingmenu_head);
+//        LinearLayout login_liner = findViewById(R.id.login_liner);
         LinearLayout guanzhu_liner = findViewById(R.id.guanzhu_liner);
-        //跳登录
-        login_liner.setOnClickListener(new View.OnClickListener() {
+        Button right_cancle = findViewById(R.id.right_cancle);
+        //判断
+        slidingmenu_head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                Toast.makeText(MainActivity.this, "哈哈哈", Toast.LENGTH_SHORT).show();
+
+                boolean flag = sp.getBoolean("flag", false);
+                //如果为false表示没有登录过   所以跳到登录界面
+                if (flag) {
+                    //w为true表示登录过,跟换头像
+                    Toast.makeText(MainActivity.this, "换头像啦===", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
+
             }
         });
         //跳关注
@@ -101,6 +122,20 @@ public class MainActivity extends BaseAcrivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
+            }
+        });
+        //==============================================
+        right_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "aaaaa", Toast.LENGTH_LONG).show();
+                File file = new File("/data/data/" + getPackageName().toString() + "/shared_prefs", "Activity.xml");
+                if (file.exists()) {
+                    file.delete();
+                    Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_LONG).show();
+                }
+                Toast.makeText(MainActivity.this, "ssss", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -166,8 +201,15 @@ public class MainActivity extends BaseAcrivity {
                 menu.toggle(true);
                 break;
             case R.id.title_write:
-                //跳转创作界面
-                startActivity(new Intent(MainActivity.this, CreatActivity.class));
+                boolean flag = sp.getBoolean("flag", false);
+                //如果为false表示没有登录过   所以跳到登录界面
+                if (flag) {
+                    //跳转创作界面
+                    startActivity(new Intent(MainActivity.this, CreatActivity.class));
+                } else {
+                    Toast.makeText(this, "亲,还没有登录呢 --", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
                 break;
         }
     }

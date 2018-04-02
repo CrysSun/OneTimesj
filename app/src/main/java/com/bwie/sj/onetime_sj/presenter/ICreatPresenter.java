@@ -11,5 +11,5 @@ import com.bwie.sj.onetime_sj.views.IloginView;
  */
 
 public interface ICreatPresenter {
-    void showCreatToView(Uri imagFile,String uid, String token, String content, ICreatModel iCreatModel, IShowView iShowView);
+    void showCreatToView(String imagFile,String uid, String token, String content, ICreatModel iCreatModel, IShowView iShowView);
 }

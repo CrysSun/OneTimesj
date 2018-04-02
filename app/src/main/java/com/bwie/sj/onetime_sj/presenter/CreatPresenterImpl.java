@@ -16,7 +16,7 @@ import com.bwie.sj.onetime_sj.views.IloginView;
 public class CreatPresenterImpl implements ICreatPresenter {
     private static final String TAG = "CreatPresenterImpl";
     @Override
-    public void showCreatToView(final Uri imagFile, String uid, String token, String content, ICreatModel iCreatModel, final IShowView iShowView) {
+    public void showCreatToView(final String imagFile, String uid, String token, String content, ICreatModel iCreatModel, final IShowView iShowView) {
         iCreatModel.getCreatjoke(imagFile,HttpConfig.baseUrl, uid, token, content, new GetDataListener() {
             @Override
             public void getSuccess(String json) {

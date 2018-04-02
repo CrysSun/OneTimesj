@@ -10,6 +10,6 @@ import java.io.File;
 
 public interface ICreatModel {
     //登录
-    void getCreatjoke(Uri jokeFiles, String url, String uid, String token, String content, GetDataListener getDataListener);
+    void getCreatjoke(String jokeFiles, String url, String uid, String token, String content, GetDataListener getDataListener);
 
 }

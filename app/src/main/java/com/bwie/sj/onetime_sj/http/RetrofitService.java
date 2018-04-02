@@ -26,10 +26,13 @@ import retrofit2.http.Url;
 
 public interface RetrofitService {
 
-    //发布作品7   uid=12790&token=7AB84A69BF4A4174F939A40734060657&content=哈哈哈哈
+    //上传头像 https://www.zhaoapi.cn/file/upload?uid=12790&token=7AB84A69BF4A4174F939A40734060657
+
+    //发布作品7   uid=12790&token=7AB8
+    // 4A69BF4A4174F939A40734060657&content=哈哈哈哈
     @POST("quarter/publishJoke?source=android&appVersion=101")
     @FormUrlEncoded
-    Call<CreatBean> creatJoke(@FieldMap Map<String, String> params, @Field("jokeFiles")Uri jokeFiles);
+    Call<CreatBean> creatJoke(@FieldMap Map<String, String> params, @Field("jokeFiles")String jokeFiles);
 
     //登录   user/login?mobile=18201084287&password=123456
     @POST

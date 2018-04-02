@@ -21,7 +21,7 @@ import retrofit2.Response;
 
 public class CreatModelImpl implements ICreatModel {
     @Override
-    public void getCreatjoke(Uri jokeFiles, String url, String uid, String token, String content, final GetDataListener getDataListener) {
+    public void getCreatjoke(String jokeFiles, String url, String uid, String token, String content, final GetDataListener getDataListener) {
         Map<String, String> map = new HashMap<>();
         map.put("uid", uid);
         map.put("token", token);

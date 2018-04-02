@@ -1,6 +1,9 @@
 package com.bwie.sj.onetime_sj.views.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,13 +45,20 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
     TextView otherYouke;
     private UserLoginPresenter userLoginPresenter;
     private static final String TAG = "OthLogActivity";
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oth_log);
         ButterKnife.bind(this);
-
+        //初始化sp
+        sp = getSharedPreferences("userlogin", Context.MODE_PRIVATE);
+        boolean flag = sp.getBoolean("flag", false);
+        //如果为true表示已登录   直接跳转
+        if (flag){
+            startActivity(new Intent(new Intent(OthLogActivity.this, MainActivity.class)));
+        }
     }
 
     @Override
@@ -74,7 +84,8 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
     @OnClick({R.id.other_back, R.id.other_reg, R.id.other_black, R.id.other_account, R.id.other_pwd, R.id.other_login, R.id.other_forget, R.id.other_youke})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.other_back:
+            case R.id.other_back://返回
+                startActivity(new Intent(OthLogActivity.this, LoginActivity.class));
                 break;
             case R.id.other_reg://注册账号
                 startActivity(new Intent(OthLogActivity.this, RegActivity.class));
@@ -100,6 +111,7 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
     /**
      * 登录
      */
+    @SuppressLint("CommitPrefEdits")
     private void initLogin() {
         String loginPhone = otherAccount.getText().toString().trim();
         String loginPwd = otherPwd.getText().toString().trim();
@@ -110,14 +122,20 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
     @Override
     public void show(String msg, String uid, String token) {
         if (msg.equals("登录成功")) {
-            Intent intent = new Intent(OthLogActivity.this, MainActivity.class);
+            //sp存取值                 =================================
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putBoolean("flag",true);
+            edit.putString("uid", uid);
+            edit.putString("token", token);
+
+            edit.commit();
+
 
             //eventbus传值
             UserInfoBean userInfoBean = new UserInfoBean(uid, token);
             EventBus.getDefault().postSticky(userInfoBean);
             Log.d(TAG, "show:????????? " + userInfoBean.getUid());
-
-            startActivity(intent);
+            startActivity(new Intent(OthLogActivity.this, MainActivity.class));
             finish();
             Toast.makeText(this, msg + "!!", Toast.LENGTH_SHORT).show();
         } else {

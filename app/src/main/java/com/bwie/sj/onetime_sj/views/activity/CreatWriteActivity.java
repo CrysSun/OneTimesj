@@ -2,12 +2,15 @@ package com.bwie.sj.onetime_sj.views.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +24,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -73,6 +77,8 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
     private TextView cancle_pop;
     private PopupWindow popupWindow;
     private Uri imagFile;
+    private CreatPresenterImpl creatPresenter;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +87,9 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
         ButterKnife.bind(this);
         //注册eventbus
         EventBus.getDefault().register(this);
+        creatPresenter = new CreatPresenterImpl();
+        //得到sp
+        sp = getSharedPreferences("userlogin", Activity.MODE_WORLD_READABLE);
     }
 
     //接收eventbus传过来的值
@@ -132,15 +141,20 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
     //弹出框
     private void initPopCamera() {
         View contentView = LayoutInflater.from(CreatWriteActivity.this).inflate(R.layout.pop_camera, null);
-        popupWindow = new PopupWindow(contentView, 500, 300, true);
+        popupWindow = new PopupWindow(contentView, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
         photo_pop = contentView.findViewById(R.id.photo_pop);
         camera_pop = contentView.findViewById(R.id.camera_pop);
         cancle_pop = contentView.findViewById(R.id.cancle_pop);
         //找控件   设置点击事件
         popupWindow.setContentView(contentView);
+        //popupWindow消失
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
         //显示PopupWindow
         View rootview = LayoutInflater.from(this).inflate(R.layout.creat_write, null);
         popupWindow.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
+        //pop弹出框  按钮的点击事件
         initClick();
     }
 
@@ -223,7 +237,8 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
                     try {
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                         Log.d(TAG, "onActivityResult: .........." + imageUri);
-                        this.imagFile=imageUri;
+                        //file:///storage/emulated/0/Android/data/com.bwie.sj.onetime_sj/cache/output_image.jpg
+                        this.imagFile = imageUri;
                         writJia.setImageBitmap(bitmap);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -248,12 +263,16 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
 
     //发表
     private void initStart() {
+        String uid = sp.getString("uid", "");
+        String token = sp.getString("token", "");
+
         //intent传值
         String content = writMsg.getText().toString().trim();
         //presenter的调用file:///storage/emulated/0/Android/data/com.bwie.sj.onetime_sj/cache/output_image.jpg
-        CreatPresenterImpl creatPresenter = new CreatPresenterImpl();
-        Log.d(TAG, "initStart: zzzzzzzzzzzzzz"+userToken+"zzzzzzzzzz" + imagFile);
-        creatPresenter.showCreatToView(imagFile,userUid, userToken, content, new CreatModelImpl(), this);
+
+        Log.d(TAG, "initStart: zzzzzzzzzzzzzz" + token + "zzzzzzzzzz" + imagFile);
+        //http://img2.imgtn.bdimg.com/it/u=1629300826,4257003656&fm=27&gp=0.jpg
+        creatPresenter.showCreatToView(imagFile + "", uid, token, content, new CreatModelImpl(), this);
     }
 
     //发布展示的方法
@@ -261,8 +280,9 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
     public void show(String msg) {
         if (msg.equals("发布成功")) {
             Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -319,8 +339,8 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
     private void displayImage(String imagePath) {
         if (imagePath != null) {
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            Log.d(TAG, "displayImage: ====imagePathimagePath"+imagePath);
-            Log.d(TAG, "displayImage: ====bibitmapbitmapbitmaptmap"+bitmap);
+            Log.d(TAG, "displayImage: ====imagePathimagePath" + imagePath);
+            Log.d(TAG, "displayImage: ====bibitmapbitmapbitmaptmap" + bitmap);
             imageview.setImageBitmap(bitmap);
         } else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
@@ -337,6 +357,7 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                Log.d(TAG, "getImagePath: !!!!!!!!!!!!!!!!!!!1" + path);
             }
             cursor.close();
         }
