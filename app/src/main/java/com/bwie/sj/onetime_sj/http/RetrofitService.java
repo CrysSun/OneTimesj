@@ -1,5 +1,7 @@
 package com.bwie.sj.onetime_sj.http;
 
+import android.net.Uri;
+
 import com.bwie.sj.onetime_sj.bean.CreatBean;
 import com.bwie.sj.onetime_sj.bean.JokeBean;
 import com.bwie.sj.onetime_sj.bean.UserLogin;
@@ -27,7 +29,7 @@ public interface RetrofitService {
     //发布作品7   uid=12790&token=7AB84A69BF4A4174F939A40734060657&content=哈哈哈哈
     @POST("quarter/publishJoke?source=android&appVersion=101")
     @FormUrlEncoded
-    Call<CreatBean> creatJoke(@FieldMap Map<String, String> params);
+    Call<CreatBean> creatJoke(@FieldMap Map<String, String> params, @Field("jokeFiles")Uri jokeFiles);
 
     //登录   user/login?mobile=18201084287&password=123456
     @POST
@@ -43,12 +45,12 @@ public interface RetrofitService {
     @POST("quarter/getVideos?source=android&appVersion=101")
     Call<CoHotBean> getVideoList(@Query("page") int page);
 
-    //段子
+    //段子file:///storage/emulated/0/Android/data/com.bwie.sj.onetime_sj/cache/output_image.jpg
     @POST("quarter/getJokes?source=android&appVersion=101")
     Call<JokeBean> getJokeList(@Query("page") int page);
 
     //视频热门https://www.zhaoapi.cn/quarter/getHotVideos?token=aaa&source=android&appVersion=101&page=1
-    @POST("quarter/getJokes?source=android&appVersion=101")
+    @POST("quarter/getHotVideos?source=android&appVersion=101")
     @FormUrlEncoded
     Call<ViHotBean> getViHotList(@Query("page") int page, @Field("token")String token);
 

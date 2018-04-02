@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.bwie.sj.onetime_sj.R;
 import com.bwie.sj.onetime_sj.adapter.JokesXreclerAdapter;
 import com.bwie.sj.onetime_sj.bean.JokeBean;
@@ -27,17 +27,17 @@ import java.util.List;
 
 public class JokesFragment extends Fragment implements IJokeView {
     private static final String TAG = "JokesFragment";
-    private XRecyclerView jokes_xrecler;
+    private XRecyclerView xrecler;
     private int page = 1;
     private JokePresenterImpl jokePresenter;
     private JokesXreclerAdapter jokesXreclerAdapter;
-    private List<JokeBean.DataBean> allList;
+    private List<JokeBean.DataBean> allList = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_jokes, null);
-        jokes_xrecler = view.findViewById(R.id.jokes_xrecler);
+        xrecler = view.findViewById(R.id.jokes_xrecler);
         //初始化presenter
         jokePresenter = new JokePresenterImpl();
         getData(1);
@@ -59,21 +59,21 @@ public class JokesFragment extends Fragment implements IJokeView {
 
     //上下拉刷新
     private void pull() {
-        jokes_xrecler.setLoadingListener(new XRecyclerView.LoadingListener() {
+        xrecler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
                 allList.clear();
                 page = 1;
                 getData(page);
-                jokes_xrecler.refreshComplete();
+                xrecler.refreshComplete();
                 Toast.makeText(getActivity(), "下拉刷新" + page, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLoadMore() {
-                page++;
+                ++page;
                 getData(page);
-                jokes_xrecler.loadMoreComplete();
+                xrecler.loadMoreComplete();
                 Toast.makeText(getActivity(), "加载更多" + page, Toast.LENGTH_SHORT).show();
             }
         });
@@ -82,23 +82,20 @@ public class JokesFragment extends Fragment implements IJokeView {
 
     //获取数据
     public void getData(int pages) {
-        allList = new ArrayList<>();
         jokePresenter.showJokesToVIew(pages, new JokeModelImpl(), this);
     }
 
     @Override
     public void showJokes(List<JokeBean.DataBean> list) {
         allList.addAll(list);
-        Log.d(TAG, "showJokes: dddddddddddddddddddddddd" + allList);
         if (jokesXreclerAdapter == null) {
             //设置布局管理器
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
             linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            jokes_xrecler.setLayoutManager(linearLayoutManager);
+            xrecler.setLayoutManager(linearLayoutManager);
             //适配器
             jokesXreclerAdapter = new JokesXreclerAdapter(getActivity(), allList);
-            jokes_xrecler.setAdapter(jokesXreclerAdapter);
-
+            xrecler.setAdapter(jokesXreclerAdapter);
         } else {
             //刷新适配器
             jokesXreclerAdapter.notifyDataSetChanged();

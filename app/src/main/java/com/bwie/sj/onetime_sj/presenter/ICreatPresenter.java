@@ -1,5 +1,7 @@
 package com.bwie.sj.onetime_sj.presenter;
 
+import android.net.Uri;
+
 import com.bwie.sj.onetime_sj.model.ICreatModel;
 import com.bwie.sj.onetime_sj.views.IShowView;
 import com.bwie.sj.onetime_sj.views.IloginView;
@@ -9,5 +11,5 @@ import com.bwie.sj.onetime_sj.views.IloginView;
  */
 
 public interface ICreatPresenter {
-    void showCreatToView( String uid, String token, String content, ICreatModel iCreatModel, IShowView iShowView);
+    void showCreatToView(Uri imagFile,String uid, String token, String content, ICreatModel iCreatModel, IShowView iShowView);
 }

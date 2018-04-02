@@ -35,6 +35,7 @@ public class HotFragment extends Fragment implements ICoHotView {
     private PresenterImpl presenter;
     private int page = 1;
     private CoHotXreclerAdapter coHotXreclerAdapter;
+    private List<CoHotBean.DataBean> listAll = new ArrayList<>();
 
     @Nullable
     @Override
@@ -44,6 +45,7 @@ public class HotFragment extends Fragment implements ICoHotView {
         xrecler = view.findViewById(R.id.hot_xrecler);
         //初始化轮播布局
         initView();
+        getData(1);
         //上下拉刷新
         pull();
         return view;
@@ -67,6 +69,7 @@ public class HotFragment extends Fragment implements ICoHotView {
         xrecler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                listAll.clear();
                 page = 1;
                 getData(page);
                 xrecler.refreshComplete();
@@ -75,10 +78,10 @@ public class HotFragment extends Fragment implements ICoHotView {
 
             @Override
             public void onLoadMore() {
-                page++;
+                ++page;
                 getData(page);
                 xrecler.loadMoreComplete();
-                Toast.makeText(getActivity(), "加载更多", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "加载更多"+page, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -96,8 +99,6 @@ public class HotFragment extends Fragment implements ICoHotView {
         banner = view.findViewById(R.id.banner);
         //xrecler    添加头布局           ===========
         xrecler.addHeaderView(view);
-
-
     }
 
 
@@ -118,6 +119,7 @@ public class HotFragment extends Fragment implements ICoHotView {
     //展示视频列表数据
     @Override
     public void ShowVideo(List<CoHotBean.DataBean> list) {
+        listAll.addAll(list);
         Log.d(TAG, "ShowHotData: ===============视频列表+++++++++++" + list);
         //设置适配器    xrecycler
         if (coHotXreclerAdapter == null) {

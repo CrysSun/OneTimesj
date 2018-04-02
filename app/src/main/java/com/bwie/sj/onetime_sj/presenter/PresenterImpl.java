@@ -41,8 +41,8 @@ public class PresenterImpl implements ICoHotPresenter {
 
     //展示视频数据
     @Override
-    public void showVideoToview(int page,ICoHotModel iModel, final ICoHotView iHotView) {
-        iModel.getVideoSuccess(page,HttpConfig.baseUrl,new GetVideoListener() {
+    public void showVideoToview(final int page, ICoHotModel iModel, final ICoHotView iHotView) {
+        iModel.getVideoSuccess(page, HttpConfig.baseUrl, new GetVideoListener() {
             @Override
             public void getVideoSuccess(List<CoHotBean.DataBean> data) {
                 iHotView.ShowVideo(data);

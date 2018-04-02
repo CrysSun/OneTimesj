@@ -19,6 +19,7 @@ import com.bwie.sj.onetime_sj.presenter.ViHotPresentImpl;
 import com.bwie.sj.onetime_sj.views.IViHotView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -37,6 +38,7 @@ public class ViHotFragment extends Fragment implements IViHotView {
     private ViHotAdapter viHotAdapter;
     private ViHotPresentImpl viHotPresent;
     private String userToken;
+    private List<ViHotBean.DataBean> listAll = new ArrayList<>();
 
     @Nullable
     @Override
@@ -50,11 +52,13 @@ public class ViHotFragment extends Fragment implements IViHotView {
         pullXrecler();
         return view;
     }
+
     //接收eventbus传过来的值
-    @Subscribe(threadMode = ThreadMode.MainThread,sticky = true)
-    public void  onNewsEvent(UserInfoBean userInfoBean){
-        this.userToken=userInfoBean.getToken();
+    @Subscribe(threadMode = ThreadMode.MainThread, sticky = true)
+    public void onNewsEvent(UserInfoBean userInfoBean) {
+        this.userToken = userInfoBean.getToken();
     }
+
     /**
      * 上下拉加载
      */
@@ -62,7 +66,8 @@ public class ViHotFragment extends Fragment implements IViHotView {
         vihot_xrecycler.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                page=1;
+                page = 1;
+                listAll.clear();
                 getData(page);
                 vihot_xrecycler.refreshComplete();
                 Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
@@ -70,7 +75,7 @@ public class ViHotFragment extends Fragment implements IViHotView {
 
             @Override
             public void onLoadMore() {
-                page++;
+                ++page;
                 getData(page);
                 vihot_xrecycler.loadMoreComplete();
                 Toast.makeText(getActivity(), "下拉刷新", Toast.LENGTH_SHORT).show();
@@ -82,18 +87,19 @@ public class ViHotFragment extends Fragment implements IViHotView {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            page=1;
+            page = 1;
             viHotPresent = new ViHotPresentImpl();
             getData(page);
         }
     }
 
     private void getData(int page) {
-        viHotPresent.showViHotToView(userToken,page, new ViHotModelImpl(), this);
+        viHotPresent.showViHotToView(userToken, page, new ViHotModelImpl(), this);
     }
 
     @Override
     public void showGrid(List<ViHotBean.DataBean> list) {
+        listAll.addAll(list);
         Log.d(TAG, "showGrid: ============" + list);
         if (viHotAdapter == null) {
             //设置布局管理器
@@ -103,7 +109,7 @@ public class ViHotFragment extends Fragment implements IViHotView {
             //设置适配器
             viHotAdapter = new ViHotAdapter(getActivity(), list);
             vihot_xrecycler.setAdapter(viHotAdapter);
-            Log.d(TAG, "showGrid: ============3333333333333333333333" );
+            Log.d(TAG, "showGrid: ============3333333333333333333333");
         } else {
             //刷新
             viHotAdapter.notifyDataSetChanged();
@@ -119,9 +125,9 @@ public class ViHotFragment extends Fragment implements IViHotView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-            //解绑eventbus
-            if (EventBus.getDefault().isRegistered(this)){
-                EventBus.getDefault().unregister(this);
-            }
+        //解绑eventbus
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 }
