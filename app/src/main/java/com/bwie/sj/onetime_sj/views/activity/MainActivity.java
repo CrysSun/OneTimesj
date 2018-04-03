@@ -99,7 +99,7 @@ public class MainActivity extends BaseAcrivity {
         SimpleDraweeView slidingmenu_head = findViewById(R.id.slidingmenu_head);
 //        LinearLayout login_liner = findViewById(R.id.login_liner);
         LinearLayout guanzhu_liner = findViewById(R.id.guanzhu_liner);
-        Button right_cancle = findViewById(R.id.right_cancle);
+//        Button right_cancle = findViewById(R.id.right_cancle);
         //判断
         slidingmenu_head.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,19 +126,19 @@ public class MainActivity extends BaseAcrivity {
             }
         });
         //==============================================
-        right_cancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "aaaaa", Toast.LENGTH_LONG).show();
-                File file = new File("/data/data/" + getPackageName().toString() + "/shared_prefs", "Activity.xml");
-                if (file.exists()) {
-                    file.delete();
-                    Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_LONG).show();
-                }
-                Toast.makeText(MainActivity.this, "ssss", Toast.LENGTH_LONG).show();
-
-            }
-        });
+//        right_cancle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(MainActivity.this, "aaaaa", Toast.LENGTH_LONG).show();
+//                File file = new File("/data/data/" + getPackageName().toString() + "/shared_prefs", "Activity.xml");
+//                if (file.exists()) {
+//                    file.delete();
+//                    Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_LONG).show();
+//                }
+//                Toast.makeText(MainActivity.this, "ssss", Toast.LENGTH_LONG).show();
+//
+//            }
+//        });
     }
 
     @Override

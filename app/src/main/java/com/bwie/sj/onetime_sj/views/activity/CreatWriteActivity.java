@@ -79,6 +79,10 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
     private Uri imagFile;
     private CreatPresenterImpl creatPresenter;
     private SharedPreferences sp;
+    private PopupWindow popback;
+    private TextView back_save;
+    private TextView back_unsave;
+    private TextView back_cancle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,8 +129,7 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
         switch (view.getId()) {
             case R.id.writ_back:
                 //底部弹出框
-//                initDialog();
-
+                initDialog();
                 break;
             case R.id.creat_start:
                 initStart();
@@ -136,6 +139,49 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
                 initPopCamera();
                 break;
         }
+    }
+
+    private void initDialog() {
+        View contentView = LayoutInflater.from(CreatWriteActivity.this).inflate(R.layout.pop_back, null);
+        popback = new PopupWindow(contentView, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+
+        back_save = contentView.findViewById(R.id.back_save);
+        back_unsave = contentView.findViewById(R.id.back_unsave);
+        back_cancle = contentView.findViewById(R.id.back_cancle);
+        //找控件   设置点击事件
+        popback.setContentView(contentView);
+        //popupWindow消失
+        popback.setBackgroundDrawable(new BitmapDrawable());
+        popback.setOutsideTouchable(true);
+        popback.setFocusable(true);
+        //显示PopupWindow
+        View rootview = LayoutInflater.from(this).inflate(R.layout.creat_write, null);
+        popback.showAtLocation(rootview, Gravity.BOTTOM, 0, 0);
+        initBackClick();
+    }
+
+    private void initBackClick() {
+        back_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popback.dismiss();
+                startActivity(new Intent(CreatWriteActivity.this,MainActivity.class));
+            }
+        });
+        back_unsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popback.dismiss();
+                startActivity(new Intent(CreatWriteActivity.this,MainActivity.class));
+            }
+        });
+        back_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popback.dismiss();
+                startActivity(new Intent(CreatWriteActivity.this,MainActivity.class));
+            }
+        });
     }
 
     //弹出框
@@ -280,6 +326,7 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
     public void show(String msg) {
         if (msg.equals("发布成功")) {
             Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(CreatWriteActivity.this, MainActivity.class));
         } else {
             Toast.makeText(this, msg + "??", Toast.LENGTH_SHORT).show();
         }
