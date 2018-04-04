@@ -141,6 +141,7 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
         }
     }
 
+    //返回弹出框
     private void initDialog() {
         View contentView = LayoutInflater.from(CreatWriteActivity.this).inflate(R.layout.pop_back, null);
         popback = new PopupWindow(contentView, WindowManager.LayoutParams.FILL_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
@@ -179,7 +180,7 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
             @Override
             public void onClick(View view) {
                 popback.dismiss();
-                startActivity(new Intent(CreatWriteActivity.this,MainActivity.class));
+//                startActivity(new Intent(CreatWriteActivity.this,MainActivity.class));
             }
         });
     }
@@ -286,6 +287,8 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
                         //file:///storage/emulated/0/Android/data/com.bwie.sj.onetime_sj/cache/output_image.jpg
                         this.imagFile = imageUri;
                         writJia.setImageBitmap(bitmap);
+                        Log.d(TAG, "onActivityResult: 3333333333333333bitmap"+bitmap);
+                        //bitmapandroid.graphics.Bitmap@4b2eef40
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -315,6 +318,7 @@ public class CreatWriteActivity extends BaseAcrivity implements IShowView {
         //intent传值
         String content = writMsg.getText().toString().trim();
         //presenter的调用file:///storage/emulated/0/Android/data/com.bwie.sj.onetime_sj/cache/output_image.jpg
+
 
         Log.d(TAG, "initStart: zzzzzzzzzzzzzz" + token + "zzzzzzzzzz" + imagFile);
         //http://img2.imgtn.bdimg.com/it/u=1629300826,4257003656&fm=27&gp=0.jpg

@@ -26,13 +26,18 @@ import retrofit2.http.Url;
 
 public interface RetrofitService {
 
+    //点赞  quarter/praise?source=android&appVersion=101&uid=12790&token=7AB84A69BF4A4174F939A40734060657&wid=282
+    @POST("quarter/praise?source=android&appVersion=101")
+    @FormUrlEncoded
+    Call<CreatBean> likeJoke(@FieldMap Map<String, String> params);
+
     //上传头像 https://www.zhaoapi.cn/file/upload?uid=12790&token=7AB84A69BF4A4174F939A40734060657
 
     //发布作品7   uid=12790&token=7AB8
     // 4A69BF4A4174F939A40734060657&content=哈哈哈哈
     @POST("quarter/publishJoke?source=android&appVersion=101")
     @FormUrlEncoded
-    Call<CreatBean> creatJoke(@FieldMap Map<String, String> params, @Field("jokeFiles")String jokeFiles);
+    Call<CreatBean> creatJoke(@FieldMap Map<String, String> params, @Query("jokeFiles") String jokeFiles);
 
     //登录   user/login?mobile=18201084287&password=123456
     @POST
@@ -55,6 +60,6 @@ public interface RetrofitService {
     //视频热门https://www.zhaoapi.cn/quarter/getHotVideos?token=aaa&source=android&appVersion=101&page=1
     @POST("quarter/getJokes?source=android&appVersion=101")
     @FormUrlEncoded
-    Call<ViHotBean> getViHotList(@Query("page") int page, @Field("token")String token);
+    Call<ViHotBean> getViHotList(@Query("page") int page, @Field("token") String token);
 
 }

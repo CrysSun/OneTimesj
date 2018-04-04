@@ -56,7 +56,7 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
         sp = getSharedPreferences("userlogin", Context.MODE_PRIVATE);
         boolean flag = sp.getBoolean("flag", false);
         //如果为true表示已登录   直接跳转
-        if (flag){
+        if (flag) {
             startActivity(new Intent(new Intent(OthLogActivity.this, MainActivity.class)));
         }
     }
@@ -86,6 +86,7 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
         switch (view.getId()) {
             case R.id.other_back://返回
                 startActivity(new Intent(OthLogActivity.this, LoginActivity.class));
+                finish();
                 break;
             case R.id.other_reg://注册账号
                 startActivity(new Intent(OthLogActivity.this, RegActivity.class));
@@ -115,7 +116,13 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
     private void initLogin() {
         String loginPhone = otherAccount.getText().toString().trim();
         String loginPwd = otherPwd.getText().toString().trim();
-        userLoginPresenter.showLoginToView(new UserLoginImpl(), this, loginPhone, loginPwd);
+        if (loginPhone.equals("") || loginPwd.equals("")) {
+            Toast.makeText(this, "不能为空", Toast.LENGTH_SHORT).show();
+
+        } else {
+            userLoginPresenter.showLoginToView(new UserLoginImpl(), this, loginPhone, loginPwd);
+
+        }
     }
 
     //登录
@@ -124,7 +131,7 @@ public class OthLogActivity extends BaseAcrivity implements IloginView {
         if (msg.equals("登录成功")) {
             //sp存取值                 =================================
             SharedPreferences.Editor edit = sp.edit();
-            edit.putBoolean("flag",true);
+            edit.putBoolean("flag", true);
             edit.putString("uid", uid);
             edit.putString("token", token);
 

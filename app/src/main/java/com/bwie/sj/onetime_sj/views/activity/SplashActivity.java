@@ -35,7 +35,7 @@ public class SplashActivity extends BaseAcrivity {
         //初始化界面
         initView();
         //延时3秒
-        myHandler.sendEmptyMessageDelayed(0, 3000);
+        myHandler.sendEmptyMessageDelayed(0, 2200);
     }
 
     @Override

@@ -33,11 +33,11 @@
             android:src="@drawable/item_jian" />
 
         <ImageView
-            android:visibility="invisible"
             android:id="@+id/jok_jia"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/item_jia" />
+            android:src="@drawable/item_jia"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 

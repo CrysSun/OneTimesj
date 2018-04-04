@@ -1,6 +1,7 @@
 package com.bwie.sj.onetime_sj.model;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.bwie.sj.onetime_sj.bean.CreatBean;
 import com.bwie.sj.onetime_sj.http.HttpConfig;
@@ -20,8 +21,9 @@ import retrofit2.Response;
  */
 
 public class CreatModelImpl implements ICreatModel {
+    private static final String TAG = "CreatModelImpl";
     @Override
-    public void getCreatjoke(String jokeFiles, String url, String uid, String token, String content, final GetDataListener getDataListener) {
+    public void getCreatjoke(final String jokeFiles, String url, String uid, String token, String content, final GetDataListener getDataListener) {
         Map<String, String> map = new HashMap<>();
         map.put("uid", uid);
         map.put("token", token);
@@ -31,6 +33,7 @@ public class CreatModelImpl implements ICreatModel {
                 .creatJoke(map,jokeFiles).enqueue(new Callback<CreatBean>() {
             @Override
             public void onResponse(Call<CreatBean> call, Response<CreatBean> response) {
+                Log.d(TAG, "onResponse: ===================="+jokeFiles);
                 getDataListener.getSuccess(response.body().getMsg());
             }
 

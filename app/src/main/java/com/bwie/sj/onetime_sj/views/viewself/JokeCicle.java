@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bwie.sj.onetime_sj.R;
 
@@ -29,7 +30,7 @@ public class JokeCicle extends RelativeLayout {
         super(context);
     }
 
-    public JokeCicle(Context context, AttributeSet attrs) {
+    public JokeCicle(final Context context, AttributeSet attrs) {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.joke_cicle, this, false);
         jok_comment = view.findViewById(R.id.jok_comment);
@@ -43,6 +44,13 @@ public class JokeCicle extends RelativeLayout {
         jok_comment.setVisibility(View.GONE);
         jok_share.setVisibility(View.GONE);
         jok_love.setVisibility(View.GONE);
+        //点赞
+        jok_love.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "比心==", Toast.LENGTH_SHORT).show();
+            }
+        });
         //点击加号   加号隐藏其他显示
         jok_jia.setOnClickListener(new OnClickListener() {
             @Override
@@ -92,27 +100,6 @@ public class JokeCicle extends RelativeLayout {
 
         animatorSet.start();
     }
-//    private void hideMenu() {
-//        //平移展示
-//        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(jok_comment
-//                , "translationX", jok_share.getTranslationX(), 0);
-//        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(jok_share
-//                , "translationX", jok_comment.getTranslationX(), 0);
-//        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(jok_love
-//                , "translationX", jok_comment.getTranslationX(), 0);
-//        //旋转]
-//        ObjectAnimator rotation1 = ObjectAnimator.ofFloat(jok_jian, "rotation", 0, 135, 0);
-//        ObjectAnimator rotation2 = ObjectAnimator.ofFloat(jok_comment, "rotation", 0, 180, 0);
-//        ObjectAnimator rotation3 = ObjectAnimator.ofFloat(jok_share, "rotation", 0, 180, 0);
-//        ObjectAnimator rotation4 = ObjectAnimator.ofFloat(jok_love, "rotation", 0, 180, 0);
-//        //动画集合
-//        AnimatorSet animatorSet = new AnimatorSet();
-//        //设置时间
-//        animatorSet.setDuration(800);
-//        animatorSet.playTogether(objectAnimator, objectAnimator1, objectAnimator2, rotation1, rotation2, rotation3, rotation4);
-//        //开始
-//        animatorSet.start();
-//    }
 
     //展示按钮的动画
     private void showMenu() {

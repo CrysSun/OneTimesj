@@ -51,19 +51,19 @@ public class HotFragment extends Fragment implements ICoHotView {
         return view;
     }
 
-    //懒加载
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            //初始化presenter
-            presenter = new PresenterImpl();
-            //调用轮播广告展示
-            presenter.showAdversToview(new ModelImpl(), this);
-            //加载第一遍
-            getData(1);
-        }
-    }
+//    //懒加载
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            //初始化presenter
+//            presenter = new PresenterImpl();
+//            //调用轮播广告展示
+//            presenter.showAdversToview(new ModelImpl(), this);
+//            //加载第一遍
+//            getData(1);
+//        }
+//    }
 
     private void pull() {
         xrecler.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -99,6 +99,13 @@ public class HotFragment extends Fragment implements ICoHotView {
         banner = view.findViewById(R.id.banner);
         //xrecler    添加头布局           ===========
         xrecler.addHeaderView(view);
+
+        //初始化presenter
+        presenter = new PresenterImpl();
+        //调用轮播广告展示
+        presenter.showAdversToview(new ModelImpl(), this);
+        //加载第一遍
+        getData(1);
     }
 
 

@@ -71,9 +71,12 @@ public class RegActivity extends BaseAcrivity implements IShowView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.reg_back:
+                startActivity(new Intent(RegActivity.this, OthLogActivity.class));
+                finish();
                 break;
             case R.id.reg_or://跳到登录界面
                 startActivity(new Intent(RegActivity.this, OthLogActivity.class));
+                finish();
                 break;
             case R.id.reg_black:
                 break;
@@ -87,6 +90,7 @@ public class RegActivity extends BaseAcrivity implements IShowView {
                 break;
             case R.id.reg_youke://跳到主界面
                 startActivity(new Intent(RegActivity.this, MainActivity.class));
+                finish();
                 break;
         }
     }
@@ -97,7 +101,13 @@ public class RegActivity extends BaseAcrivity implements IShowView {
     private void initReg() {
         String loginPhone = regAccount.getText().toString().trim();
         String loginPwd = regPwd.getText().toString().trim();
-        userLoginPresenter.showRegToView(new UserLoginImpl(), this, loginPhone, loginPwd);
+        if (loginPhone.equals("") || loginPwd.equals("")) {
+            Toast.makeText(this, "不能为空", Toast.LENGTH_SHORT).show();
+
+        } else {
+            userLoginPresenter.showRegToView(new UserLoginImpl(), this, loginPhone, loginPwd);
+
+        }
     }
 
     //注册
