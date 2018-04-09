@@ -5,7 +5,7 @@ import android.util.Log;
 import com.bwie.sj.onetime_sj.bean.UserLogin;
 import com.bwie.sj.onetime_sj.http.HttpConfig;
 import com.bwie.sj.onetime_sj.http.RetrofitService;
-import com.bwie.sj.onetime_sj.http.RetrofitUtil;
+import com.bwie.sj.onetime_sj.http.RetrofitUtils;
 
 import java.util.Map;
 
@@ -26,7 +26,7 @@ public class UserLoginImpl implements IUserLoginModel {
     public void showUserLogin(String url, final Map<String, String> params, final GetUidListener getUidListener) {
         Log.d(TAG, "onResponse: ??????????" + params);
 
-        RetrofitUtil.getInstace(HttpConfig.baseUrl).getData(RetrofitService.class)
+        RetrofitUtils.getInstace(HttpConfig.baseUrl).getData(RetrofitService.class)
                 .userLogin(url, params).enqueue(new Callback<UserLogin>() {
             @Override
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
@@ -46,7 +46,7 @@ public class UserLoginImpl implements IUserLoginModel {
     //注册
     @Override
     public void showUserReg(String url, Map<String, String> params, final GetDataListener getDataListener) {
-        RetrofitUtil.getInstace(HttpConfig.baseUrl).getData(RetrofitService.class)
+        RetrofitUtils.getInstace(HttpConfig.baseUrl).getData(RetrofitService.class)
                 .userReg(url, params).enqueue(new Callback<UserLogin>() {
             @Override
             public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {

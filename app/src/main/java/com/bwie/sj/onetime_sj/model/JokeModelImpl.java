@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.bwie.sj.onetime_sj.bean.JokeBean;
 import com.bwie.sj.onetime_sj.http.RetrofitService;
-import com.bwie.sj.onetime_sj.http.RetrofitUtil;
+import com.bwie.sj.onetime_sj.http.RetrofitUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,9 +21,8 @@ public class JokeModelImpl implements IJokeModel {
     //获取段子的数据
     @Override
     public void getJokeData(int page, String url, final GetJokeListener getJokeListener) {
-        RetrofitUtil instace = RetrofitUtil.getInstace(url);
-//        Observable<JokeBean> jokeList = (Observable<JokeBean>) instace.getData(RetrofitService.class).getJokeList(page);
-//        jokeList.subscribe((Schedulers.newThread())
+
+        RetrofitUtils instace = RetrofitUtils.getInstace(url);
         instace.getData(RetrofitService.class).getJokeList(page).enqueue(new Callback<JokeBean>() {
             @Override
             public void onResponse(Call<JokeBean> call, Response<JokeBean> response) {
@@ -37,6 +36,7 @@ public class JokeModelImpl implements IJokeModel {
 
             }
         });
+
     }
 
     @Override

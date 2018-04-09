@@ -6,6 +6,7 @@ package com.bwie.sj.onetime_sj.bean;
  */
 
 public class LikeBean {
+
     /**
      * msg : 已点赞
      * code : 0

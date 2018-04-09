@@ -18,22 +18,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Administrator on 2018/03/22.
  */
 
-public class RetrofitUtil {
+public class RetrofitUtils {
     //单利模式
-    private static RetrofitUtil retrofitUtil;
+    private static RetrofitUtils retrofitUtil;
 
     public String url;
     private final Retrofit retrofit;
 
-    public static RetrofitUtil getInstace(String url) {
+    public static RetrofitUtils getInstace(String url) {
         if (retrofitUtil == null) {
-            retrofitUtil = new RetrofitUtil(url);
+            retrofitUtil = new RetrofitUtils(url);
         }
         return retrofitUtil;
     }
 
     //初始化retrofit
-    public RetrofitUtil(String url) {
+    public RetrofitUtils(String url) {
         this.url = url;
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new MyInterceptor()).build();
 

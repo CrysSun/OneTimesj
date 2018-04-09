@@ -6,7 +6,7 @@ import com.bwie.sj.onetime_sj.bean.CoHotBean;
 import com.bwie.sj.onetime_sj.http.OkLoadListener;
 import com.bwie.sj.onetime_sj.http.OkhttpUtil;
 import com.bwie.sj.onetime_sj.http.RetrofitService;
-import com.bwie.sj.onetime_sj.http.RetrofitUtil;
+import com.bwie.sj.onetime_sj.http.RetrofitUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +46,7 @@ public class ModelImpl implements ICoHotModel {
     //获取视频
     @Override
     public void getVideoSuccess(int page,String url, final GetVideoListener getVideoData) {
-        RetrofitUtil instace = RetrofitUtil.getInstace(url);
+        RetrofitUtils instace = RetrofitUtils.getInstace(url);
         instace.getData(RetrofitService.class).getVideoList(page).enqueue(new Callback<CoHotBean>() {
             @Override
             public void onResponse(Call<CoHotBean> call, Response<CoHotBean> response) {

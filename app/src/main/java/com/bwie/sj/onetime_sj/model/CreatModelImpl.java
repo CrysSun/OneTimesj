@@ -1,14 +1,11 @@
 package com.bwie.sj.onetime_sj.model;
 
-import android.net.Uri;
 import android.util.Log;
 
 import com.bwie.sj.onetime_sj.bean.CreatBean;
-import com.bwie.sj.onetime_sj.http.HttpConfig;
 import com.bwie.sj.onetime_sj.http.RetrofitService;
-import com.bwie.sj.onetime_sj.http.RetrofitUtil;
+import com.bwie.sj.onetime_sj.http.RetrofitUtils;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +26,7 @@ public class CreatModelImpl implements ICreatModel {
         map.put("token", token);
         map.put("content", content);
 //        map.put("jokeFiles", jokeFiles+"");
-        RetrofitUtil.getInstace(url).getData(RetrofitService.class)
+        RetrofitUtils.getInstace(url).getData(RetrofitService.class)
                 .creatJoke(map,jokeFiles).enqueue(new Callback<CreatBean>() {
             @Override
             public void onResponse(Call<CreatBean> call, Response<CreatBean> response) {

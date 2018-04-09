@@ -57,6 +57,7 @@ public interface RetrofitService {
     @POST("quarter/getJokes?source=android&appVersion=101")
     Call<JokeBean> getJokeList(@Query("page") int page);
 
+
     //视频热门https://www.zhaoapi.cn/quarter/getHotVideos?token=aaa&source=android&appVersion=101&page=1
     @POST("quarter/getJokes?source=android&appVersion=101")
     @FormUrlEncoded
